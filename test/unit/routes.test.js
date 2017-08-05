@@ -10,17 +10,29 @@ describe('routes', () => {
     })
 
     describe('and no callbacks provided', () => {
-      test('it returns undefined', () => {
+      test('it returns undefined', async () => {
         const route = routes.page('/', 'blog#index')
-        expect(route.handler()).toBeUndefined()
+        expect(await route.handler()).toEqual({})
       })
     })
 
     describe('and one callback provided', () => {
-      test('it returns callback return value', () => {
+      test('it returns callback return value', async () => {
         const expectedReturn = { cool: true }
         const route = routes.page('/', 'blog#index', [() => expectedReturn])
-        expect(route.handler()).toBe(expectedReturn)
+        expect(await route.handler()).toEqual(expectedReturn)
+      })
+    })
+
+    describe('and one callback provided', () => {
+      test('it returns callback return value', async () => {
+        const expectedReturn1 = { bob: true }
+        const expectedReturn2 = { cat: true }
+        const route = routes.page('/', 'blog#index', [
+          () => expectedReturn1,
+          () => expectedReturn2
+        ])
+        expect(await route.handler()).toEqual({ ...expectedReturn1, ...expectedReturn2 })
       })
     })
   })

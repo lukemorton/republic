@@ -1,4 +1,4 @@
-function createAction (method, path, action, callbacks) {
+function createAction (method, path, action, callbacks = []) {
   console.log('Serving', method, path, 'with', action)
   const [module, name] = action.split('#')
 
@@ -8,10 +8,16 @@ function createAction (method, path, action, callbacks) {
     action,
     module,
     name,
-    handler () {
-      if (callbacks && callbacks[0]) {
-        return callbacks[0]()
+    async handler () {
+      let result = {}
+
+      if (callbacks.length > 0) {
+        for (let cb of callbacks) {
+          result = { ...result, ...await cb() }
+        }
       }
+
+      return result
     }
   }
 }
