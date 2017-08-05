@@ -9,7 +9,10 @@ export default wrapPage(app, ({ posts }) =>
 
       <div>
         <h2>Blog posts</h2>
-        {posts.map(({ title }) => <div>{title}</div>)}
+
+        <ul>
+          {posts.map(({ title }) => <li>{title}</li>)}
+        </ul>
       </div>
     </main>
   </div>
