@@ -1,6 +1,6 @@
 import express from 'express'
 import { parse } from 'url'
-import { asExpressMiddleware } from '../../src/express'
+import { asExpressMiddleware } from 'upcoming/express'
 import app from './app'
 
 export function createServer (nextApp) {

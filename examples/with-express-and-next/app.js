@@ -1,5 +1,6 @@
-import Upcoming, { route } from '../../src/upcoming'
+import Upcoming, { route } from 'upcoming'
+import * as blog from './src/blog'
 
 export default new Upcoming(
-  route.page('/', 'blog#index')
+  route.page('/', 'blog#index', [() => blog.FetchPosts({ limit: 10 })])
 )

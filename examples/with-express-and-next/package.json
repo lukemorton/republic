@@ -12,7 +12,8 @@
     "express": "^4.15.3",
     "next": "^2.4.9",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "upcoming": "@latest"
   },
   "babel": {
     "presets": [

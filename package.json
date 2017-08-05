@@ -2,7 +2,7 @@
   "name": "upcoming",
   "version": "1.0.0",
   "description": "Routing, forms, and actions for your React.",
-  "main": "lib/upcoming.js",
+  "main": "./upcoming.js",
   "scripts": {
     "prepare": "babel src --out-dir lib",
     "watch": "babel src --out-dir lib --watch",
