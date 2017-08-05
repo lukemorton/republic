@@ -7,6 +7,10 @@ export default class Upcoming {
     this.middleware = middleware
   }
 
+  routes () {
+    return this.middleware
+  }
+
   actions () {
     let actions = {}
 
