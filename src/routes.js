@@ -7,7 +7,12 @@ function createAction (method, path, action, callbacks) {
     path,
     action,
     module,
-    name
+    name,
+    handler () {
+      if (callbacks && callbacks[0]) {
+        return callbacks[0]()
+      }
+    }
   }
 }
 
