@@ -1,9 +1,9 @@
 import sinon from 'sinon'
-import * as Routes from '../../src/routes'
+import * as routes from '../../src/routes'
 
-describe('Routes', () => {
+describe('routes', () => {
   describe('page', () => {
-    const route = Routes.page('/', 'blog#index')
+    const route = routes.page('/', 'blog#index')
 
     test('it returns module and name', () => {
       expect(route.module).toBe('blog')
@@ -12,7 +12,7 @@ describe('Routes', () => {
   })
 
   describe('GET', () => {
-    const route = Routes.GET('/', 'blog#index')
+    const route = routes.GET('/', 'blog#index')
 
     test('it returns module and name', () => {
       expect(route.module).toBe('blog')
@@ -21,7 +21,7 @@ describe('Routes', () => {
   })
 
   describe('POST', () => {
-    const route = Routes.GET('/', 'blog#subscribe')
+    const route = routes.GET('/', 'blog#subscribe')
 
     test('it returns module and name', () => {
       expect(route.module).toBe('blog')
@@ -30,7 +30,7 @@ describe('Routes', () => {
   })
 
   describe('DELETE', () => {
-    const route = Routes.GET('/', 'blog#deletePost')
+    const route = routes.GET('/', 'blog#deletePost')
 
     test('it returns module and name', () => {
       expect(route.module).toBe('blog')
