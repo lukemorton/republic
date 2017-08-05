@@ -1,3 +1,5 @@
+import compose from 'lodash.compose'
+
 function createAction (method, path, action, callbacks = []) {
   console.log('Serving', method, path, 'with', action)
   const [module, name] = action.split('#')
@@ -10,12 +12,10 @@ function createAction (method, path, action, callbacks = []) {
     name,
     async handler (ctx) {
       if (callbacks.length > 0) {
-        for (let cb of callbacks) {
-          ctx = await cb(ctx)
-        }
+        const middleware = [...callbacks]
+        const fn = middleware.pop()
+        return await compose(...middleware)(fn)(ctx)
       }
-
-      return ctx
     }
   }
 }

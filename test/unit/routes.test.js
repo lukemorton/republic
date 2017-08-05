@@ -26,14 +26,47 @@ describe('routes', () => {
       })
     })
 
-    describe('and one callback provided', () => {
-      test('it returns callback return value', async () => {
+    describe('and two callbacks provided', () => {
+      test('it not continue stack if next not called', async () => {
         const route = routes.page('/', 'blog#index', [
-          ({ props }) => ({ props: { ...props, bob: true } }),
-          ({ props }) => ({ props: { ...props, cat: true } })
+          (next) => (ctx) => ({ bob: true }),
+                    (ctx) => ({ cat: true })
         ])
-        const { props } = await route.handler({ props: {} })
-        expect(props).toEqual({ bob: true, cat: true })
+        expect(await route.handler({})).toEqual({ bob: true })
+      })
+
+      test('it continues stack once next called', async () => {
+        const route = routes.page('/', 'blog#index', [
+          (next) => (ctx) => ({ bob: true, ...next(ctx) }),
+                    (ctx) => ({ cat: true })
+        ])
+
+        expect(await route.handler({})).toEqual({ bob: true, cat: true })
+      })
+    })
+
+    describe('and three callbacks provided', () => {
+      test('it continues stack once next called', async () => {
+        const route = routes.page('/', 'blog#index', [
+          (next) => (ctx) => ({ bob: true, ...next(ctx) }),
+          (next) => (ctx) => ({ cat: true, ...next(ctx) }),
+                    (ctx) => ({ dog: true })
+        ])
+
+        expect(await route.handler({})).toEqual({ bob: true, cat: true, dog: true })
+      })
+    })
+
+    describe('and four callbacks provided', () => {
+      test('it continues stack once next called', async () => {
+        const route = routes.page('/', 'blog#index', [
+          (next) => async (ctx) => ['bob', ...await next(ctx)],
+          (next) => async (ctx) => ['cat', ...await next(ctx)],
+          (next) => async (ctx) => ['dog', ...await next(ctx)],
+                    async (ctx) => ['fox']
+        ])
+
+        expect(await route.handler({})).toEqual(['bob', 'cat', 'dog', 'fox'])
       })
     })
   })
