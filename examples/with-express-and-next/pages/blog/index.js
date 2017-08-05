@@ -1,6 +1,12 @@
 import React from 'react'
+import Link from 'next/link'
 import { wrapPage } from 'upcoming/next'
 import app from '../../app'
+
+const Post = ({ title, slug }, i) =>
+  <li key={i}>
+    <a href={`/post/${slug}`}>{title}</a>
+  </li>
 
 export default wrapPage(app, ({ posts }) =>
   <div>
@@ -11,7 +17,7 @@ export default wrapPage(app, ({ posts }) =>
         <h2>Blog posts</h2>
 
         <ul>
-          {posts.map(({ title }) => <li>{title}</li>)}
+          {posts.map(Post)}
         </ul>
       </div>
     </main>

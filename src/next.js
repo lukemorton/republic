@@ -4,11 +4,12 @@ export function wrapPage (app, Component) {
   return class extends React.Component {
     static displayName = `Page(${Component.displayName || Component.name})`
 
-    static getInitialProps ({ query }) {
+    static getInitialProps (ctx) {
+      const { query } = ctx
       const handler = app.actionHandler(query.route && query.route.action)
 
       if (handler) {
-        return handler()
+        return handler(ctx)
       }
 
       return {}

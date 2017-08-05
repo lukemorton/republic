@@ -37,8 +37,9 @@ describe('wrapPage()', () => {
         const route = { action: 'blog#index', handler: jest.fn() }
         const app = new Upcoming(route)
         const Page = wrapPage(app, () => null)
-        Page.getInitialProps({ query: { route } })
-        expect(route.handler).toBeCalled()
+        const ctx = { query: { route } }
+        Page.getInitialProps(ctx)
+        expect(route.handler).toBeCalledWith(ctx)
       })
     })
 
