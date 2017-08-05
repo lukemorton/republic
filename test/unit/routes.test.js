@@ -28,13 +28,12 @@ describe('routes', () => {
 
     describe('and one callback provided', () => {
       test('it returns callback return value', async () => {
-        const expectedReturn1 = { bob: true }
-        const expectedReturn2 = { cat: true }
         const route = routes.page('/', 'blog#index', [
-          ({ props }) => expectedReturn1,
-          ({ props }) => ({ ...props, ...expectedReturn2 })
+          ({ props }) => ({ props: { ...props, bob: true } }),
+          ({ props }) => ({ props: { ...props, cat: true } })
         ])
-        expect(await route.handler()).toEqual({ ...expectedReturn1, ...expectedReturn2 })
+        const { props } = await route.handler({ props: {} })
+        expect(props).toEqual({ bob: true, cat: true })
       })
     })
   })

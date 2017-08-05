@@ -8,16 +8,14 @@ function createAction (method, path, action, callbacks = []) {
     action,
     module,
     name,
-    async handler () {
-      let props
-
+    async handler (ctx) {
       if (callbacks.length > 0) {
         for (let cb of callbacks) {
-          props = await cb({ props })
+          ctx = await cb(ctx)
         }
       }
 
-      return props
+      return ctx
     }
   }
 }
