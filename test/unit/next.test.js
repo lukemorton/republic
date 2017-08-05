@@ -1,19 +1,55 @@
 import React from 'react'
-import sinon from 'sinon'
 import { mount } from 'enzyme'
 import { wrapPage } from '../../src/next'
+import Upcoming from '../../src/upcoming'
 
-describe('Next', () => {
+describe('wrapPage()', () => {
   describe('when wrapping component with next.js page', () => {
-    test('it defines a getInitialProps', () => {
-      const page = wrapPage(() => null)
-      expect(page.getInitialProps).toBeTruthy()
+    test('it defines display name', () => {
+      const Component = () => <div>Testing</div>
+      Component.displayName = 'Component'
+      const Page = wrapPage(null, Component)
+      expect(Page.displayName).toBe('Page(Component)')
     })
 
+    test('it defines .getInitialProps()', () => {
+      const Page = wrapPage(null, () => null)
+      expect(Page.getInitialProps).toBeTruthy()
+    })
+
+    test('it passes props to wrapped component', () => {
+      const Component = () => <div>Testing</div>
+      const Page = wrapPage(null, Component)
+      const page = mount(<Page testing />)
+      expect(page.find(Component)).toHaveProp('testing')
+    })
+  })
+
+  describe('when loading props', () => {
+    describe('and handler was provided', () => {
+      test('it calls action within getInitialProps', () => {
+        const handler = jest.fn()
+        const app = new Upcoming({ action: 'blog#index', handler })
+        const Page = wrapPage(app, () => null)
+        Page.getInitialProps({ query: { action: 'blog#index' } })
+        expect(handler).toBeCalled()
+      })
+    })
+
+    describe('and handler was not provided', () => {
+      test('it returns empty object from getInitialProps', () => {
+        const app = new Upcoming({ action: 'blog#index' })
+        const Page = wrapPage(app, () => null)
+        const props = Page.getInitialProps({ query: { action: 'blog#index' } })
+        expect(props).toEqual({})
+      })
+    })
+  })
+
+  describe('when renderering', () => {
     test('it renders Component', () => {
-      const WrappedComponent = wrapPage(null, () => <div>Testing</div>)
-      const wrappedComponent = mount(<WrappedComponent />)
-      expect(wrappedComponent.text()).toMatch('Testing')
+      const Page = wrapPage(null, () => <div>Testing</div>)
+      expect(mount(<Page />)).toHaveText('Testing')
     })
   })
 })

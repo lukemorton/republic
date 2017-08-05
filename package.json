@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "babel src --out-dir lib",
     "watch": "babel src --out-dir lib --watch",
-    "test": "jest"
+    "test": "jest --notify"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "enzyme": "^2.9.1",
     "express": "^4.15.3",
     "jest": "^20.0.4",
+    "jest-enzyme": "^3.6.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
@@ -38,5 +39,8 @@
       "stage-2",
       "react"
     ]
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
   }
 }

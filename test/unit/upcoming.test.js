@@ -1,4 +1,3 @@
-import sinon from 'sinon'
 import Upcoming, { routes } from '../../src/upcoming'
 
 describe('Upcoming', () => {
@@ -17,11 +16,17 @@ describe('Upcoming', () => {
 
   describe('when building actions', () => {
     test('it registers actions', () => {
-      const module = 'blog'
-      const name = 'index'
-      const middleware = { module, name, action: sinon.spy() }
+      const middleware = { action: 'blog#index', handler: jest.fn() }
       const app = new Upcoming(middleware)
-      expect(app.actions()[module][name]).toBe(middleware.action)
+      expect(app.actions()['blog#index']).toBe(middleware.handler)
+    })
+  })
+
+  describe('when retrieving an action handler', () => {
+    test('it returns handler for action', () => {
+      const middleware = { action: 'blog#index', handler: jest.fn() }
+      const app = new Upcoming(middleware)
+      expect(app.actionHandler('blog#index')).toBe(middleware.handler)
     })
   })
 })

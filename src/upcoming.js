@@ -10,11 +10,14 @@ export default class Upcoming {
   actions () {
     let actions = {}
 
-    this.middleware.forEach(({ module, name, action }) => {
-      actions[module] = actions[module] || {}
-      actions[module][name] = action
+    this.middleware.forEach(({ action, handler }) => {
+      actions[action] = handler
     })
 
     return actions
+  }
+
+  actionHandler (action) {
+    return this.actions()[action]
   }
 }
