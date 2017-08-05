@@ -1,8 +1,8 @@
-import Upcoming, { routes } from '../../src/upcoming'
+import Upcoming, { route } from '../../src/upcoming'
 
 describe('Upcoming', () => {
-  test('module exposes routes', () => {
-    expect(routes).toBeTruthy()
+  test('module exposes route', () => {
+    expect(route).toBeTruthy()
   })
 
   describe('when initialising new application', () => {

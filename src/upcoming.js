@@ -1,6 +1,6 @@
-import * as routes from './routes'
+import * as route from './routes'
 
-export { routes }
+export { route }
 
 export default class Upcoming {
   constructor (...middleware) {
