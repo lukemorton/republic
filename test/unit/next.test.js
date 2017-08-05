@@ -34,19 +34,20 @@ describe('wrapPage()', () => {
   describe('when loading props', () => {
     describe('and handler was provided', () => {
       test('it calls action within getInitialProps', () => {
-        const handler = jest.fn()
-        const app = new Upcoming({ action: 'blog#index', handler })
+        const route = { action: 'blog#index', handler: jest.fn() }
+        const app = new Upcoming(route)
         const Page = wrapPage(app, () => null)
-        Page.getInitialProps({ query: { action: 'blog#index' } })
-        expect(handler).toBeCalled()
+        Page.getInitialProps({ query: { route } })
+        expect(route.handler).toBeCalled()
       })
     })
 
     describe('and handler was not provided', () => {
       test('it returns empty object from getInitialProps', () => {
-        const app = new Upcoming({ action: 'blog#index' })
+        const route = { action: 'blog#index' }
+        const app = new Upcoming(route)
         const Page = wrapPage(app, () => null)
-        const props = Page.getInitialProps({ query: { action: 'blog#index' } })
+        const props = Page.getInitialProps({ query: { route } })
         expect(props).toEqual({})
       })
     })

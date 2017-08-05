@@ -5,7 +5,7 @@ export function wrapPage (app, Component) {
     static displayName = `Page(${Component.displayName || Component.name})`
 
     static getInitialProps ({ query }) {
-      const handler = app.actionHandler(query.action)
+      const handler = app.actionHandler(query.route && query.route.action)
 
       if (handler) {
         return handler()

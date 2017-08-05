@@ -1,0 +1,25 @@
+{
+  "name": "with-express-and-next",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "jest --notify",
+    "start": "babel-node start.js"
+  },
+  "author": "Luke Morton",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "next": "^2.4.9",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "babel": {
+    "presets": [
+      "next/babel",
+      "es2015",
+      "stage-2",
+      "react"
+    ]
+  }
+}
