@@ -12,14 +12,16 @@ describe('routes', () => {
     describe('and no callbacks provided', () => {
       test('it returns undefined', async () => {
         const route = routes.page('/', 'blog#index')
-        expect(await route.handler()).toEqual({})
+        expect(await route.handler()).toBeUndefined()
       })
     })
 
     describe('and one callback provided', () => {
       test('it returns callback return value', async () => {
         const expectedReturn = { cool: true }
-        const route = routes.page('/', 'blog#index', [() => expectedReturn])
+        const route = routes.page('/', 'blog#index', [
+          () => expectedReturn
+        ])
         expect(await route.handler()).toEqual(expectedReturn)
       })
     })
@@ -29,8 +31,8 @@ describe('routes', () => {
         const expectedReturn1 = { bob: true }
         const expectedReturn2 = { cat: true }
         const route = routes.page('/', 'blog#index', [
-          () => expectedReturn1,
-          () => expectedReturn2
+          ({ props }) => expectedReturn1,
+          ({ props }) => ({ ...props, ...expectedReturn2 })
         ])
         expect(await route.handler()).toEqual({ ...expectedReturn1, ...expectedReturn2 })
       })
