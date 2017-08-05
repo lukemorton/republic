@@ -5,9 +5,15 @@ import Upcoming from '../../src/upcoming'
 
 describe('wrapPage()', () => {
   describe('when wrapping component with next.js page', () => {
-    test('it defines display name', () => {
+    test('it defines display name with Component.displayName', () => {
       const Component = () => <div>Testing</div>
-      Component.displayName = 'Component'
+      Component.displayName = 'CustomName'
+      const Page = wrapPage(null, Component)
+      expect(Page.displayName).toBe('Page(CustomName)')
+    })
+
+    test('it defines display name with Component.name', () => {
+      const Component = () => <div>Testing</div>
       const Page = wrapPage(null, Component)
       expect(Page.displayName).toBe('Page(Component)')
     })
