@@ -9,7 +9,7 @@ export function wrapPage (app, Component) {
       const handler = app.routeHandler(query.route && query.route.action)
 
       if (handler) {
-        return handler(ctx)
+        return handler(ctx) || {}
       }
 
       return {}

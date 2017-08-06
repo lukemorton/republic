@@ -41,6 +41,14 @@ describe('wrapPage()', () => {
         Page.getInitialProps(ctx)
         expect(route.handler).toBeCalledWith(ctx)
       })
+
+      test('it returns empty object if handler returns undefined', () => {
+        const route = { action: 'blog#index', handler: jest.fn(() => undefined) }
+        const app = new Upcoming(route)
+        const Page = wrapPage(app, () => null)
+        const props = Page.getInitialProps({ query: { route } })
+        expect(props).toEqual({})
+      })
     })
 
     describe('and handler was not provided', () => {
