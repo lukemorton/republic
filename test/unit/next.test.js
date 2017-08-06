@@ -34,12 +34,15 @@ describe('wrapPage()', () => {
   describe('when loading props', () => {
     describe('and handler was provided', () => {
       test('it calls action within getInitialProps', () => {
+        const req = { mock: true }
+        const query = { mock: true }
         const route = { action: 'blog#index', handler: jest.fn() }
         const app = new Upcoming(route)
         const Page = wrapPage(app, () => null)
-        const ctx = { query: { route } }
-        Page.getInitialProps(ctx)
-        expect(route.handler).toBeCalledWith(ctx)
+        Page.getInitialProps({ req, query: { route, query } })
+        expect(route.handler).toBeCalledWith(
+          expect.objectContaining({ req, route, query })
+        )
       })
 
       test('it returns empty object if handler returns undefined', () => {
