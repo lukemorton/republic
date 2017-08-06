@@ -1,6 +1,6 @@
 import express from 'express'
 
-export function asExpressMiddleware(app, handler) {
+export function asExpressMiddleware (app, handler) {
   const router = express.Router()
 
   app.routes().forEach((route) => {
