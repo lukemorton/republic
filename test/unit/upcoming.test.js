@@ -6,27 +6,27 @@ describe('Upcoming', () => {
   })
 
   describe('when initialising new application', () => {
-    test('it sets middleware', () => {
-      const middleware = ['cool', 'bob']
-      const app = new Upcoming(...middleware)
-      expect(app.middleware).toContain(middleware[0])
-      expect(app.middleware).toContain(middleware[1])
+    test('it sets routes', () => {
+      const routes = ['cool', 'bob']
+      const app = new Upcoming(...routes)
+      expect(app.routes()).toContain(routes[0])
+      expect(app.routes()).toContain(routes[1])
     })
   })
 
   describe('when building actions', () => {
     test('it registers actions', () => {
-      const middleware = { action: 'blog#index', handler: jest.fn() }
-      const app = new Upcoming(middleware)
-      expect(app.actions()['blog#index']).toBe(middleware.handler)
+      const route = { action: 'blog#index', handler: jest.fn() }
+      const app = new Upcoming(route)
+      expect(app.route('blog#index')).toBe(route)
     })
   })
 
-  describe('when retrieving an action handler', () => {
+  describe('when retrieving a route handler', () => {
     test('it returns handler for action', () => {
-      const middleware = { action: 'blog#index', handler: jest.fn() }
-      const app = new Upcoming(middleware)
-      expect(app.actionHandler('blog#index')).toBe(middleware.handler)
+      const route = { action: 'blog#index', handler: jest.fn() }
+      const app = new Upcoming(route)
+      expect(app.routeHandler('blog#index')).toBe(route.handler)
     })
   })
 })

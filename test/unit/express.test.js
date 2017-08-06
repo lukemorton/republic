@@ -2,10 +2,11 @@ import supertest from 'supertest'
 import express from 'express'
 import { asExpressMiddleware } from '../../src/express'
 import Upcoming, { route } from '../../src/upcoming'
+const { GET } = route
 
 describe('asExpressMiddleware', () => {
-  const middleware = route.GET('/api/blog/posts', 'api/blog#posts')
-  const app = new Upcoming(middleware)
+  const route = GET('/api/blog/posts', 'api/blog#posts')
+  const app = new Upcoming(route)
   let handler
   let server
 
@@ -21,6 +22,6 @@ describe('asExpressMiddleware', () => {
 
   test('it passes route to handler', async () => {
     const res = await supertest(server).get('/api/blog/posts')
-    expect(handler).toBeCalledWith(expect.objectContaining({ route: middleware }))
+    expect(handler).toBeCalledWith(expect.objectContaining({ route }))
   })
 })

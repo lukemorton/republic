@@ -3,25 +3,29 @@ import * as route from './routes'
 export { route }
 
 export default class Upcoming {
-  constructor (...middleware) {
-    this.middleware = middleware
+  constructor (...routes) {
+    this._routes = routes
   }
 
   routes () {
-    return this.middleware
+    return this._routes
   }
 
-  actions () {
-    let actions = {}
-
-    this.middleware.forEach(({ action, handler }) => {
-      actions[action] = handler
-    })
-
-    return actions
+  route (action) {
+    return routesByAction(this.routes())[action]
   }
 
-  actionHandler (action) {
-    return this.actions()[action]
+  routeHandler (action) {
+    return this.route(action).handler
   }
+}
+
+function routesByAction (routes) {
+  let routesByAction = {}
+
+  routes.forEach((route) => {
+    routesByAction[route.action] = route
+  })
+
+  return routesByAction
 }

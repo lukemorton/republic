@@ -6,7 +6,7 @@ export function wrapPage (app, Component) {
 
     static getInitialProps (ctx) {
       const { query } = ctx
-      const handler = app.actionHandler(query.route && query.route.action)
+      const handler = app.routeHandler(query.route && query.route.action)
 
       if (handler) {
         return handler(ctx)
