@@ -74,20 +74,24 @@ describe('routes', () => {
   describe('page', () => {
     const route = routes.page('/', 'blog#index')
     test('it is GET', () => expect(route.method).toBe('GET'))
+    test('it isPage()', () => expect(route.isPage()).toBe(true))
   })
 
   describe('GET', () => {
     const route = routes.GET('/', 'blog#index')
     test('it is GET', () => expect(route.method).toBe('GET'))
+    test('isPage() === false', () => expect(route.isPage()).toBe(false))
   })
 
   describe('POST', () => {
     const route = routes.POST('/', 'blog#subscribe')
     test('it is POST', () => expect(route.method).toBe('POST'))
+    test('isPage() === false', () => expect(route.isPage()).toBe(false))
   })
 
   describe('DELETE', () => {
     const route = routes.DELETE('/', 'blog#deletePost')
     test('it is DELETE', () => expect(route.method).toBe('DELETE'))
+    test('isPage() === false', () => expect(route.isPage()).toBe(false))
   })
 })
