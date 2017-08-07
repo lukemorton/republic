@@ -1,7 +1,6 @@
 import compose from 'lodash.compose'
 
 function createAction (method, path, action, callbacks = []) {
-  console.log('Serving', method, path, 'with', action)
   const [module, name] = action.split('#')
 
   return {
