@@ -33,33 +33,33 @@ describe('wrapPage()', () => {
 
   describe('when loading props', () => {
     describe('and handler was provided', () => {
-      test('it calls action within getInitialProps', () => {
+      test('it calls action within getInitialProps', async () => {
         const req = { mock: true }
         const query = { mock: true }
         const route = { action: 'blog#index', handler: jest.fn() }
         const app = new Upcoming(route)
         const Page = wrapPage(app, () => null)
-        Page.getInitialProps({ req, query: { route, query } })
+        await Page.getInitialProps({ req, query: { route, query } })
         expect(route.handler).toBeCalledWith(
           expect.objectContaining({ req, route, query })
         )
       })
 
-      test('it returns empty object if handler returns undefined', () => {
+      test('it returns empty object if handler returns undefined', async () => {
         const route = { action: 'blog#index', handler: jest.fn(() => undefined) }
         const app = new Upcoming(route)
         const Page = wrapPage(app, () => null)
-        const props = Page.getInitialProps({ query: { route } })
+        const props = await Page.getInitialProps({ query: { route } })
         expect(props).toEqual({})
       })
     })
 
     describe('and handler was not provided', () => {
-      test('it returns empty object from getInitialProps', () => {
+      test('it returns empty object from getInitialProps', async () => {
         const route = { action: 'blog#index' }
         const app = new Upcoming(route)
         const Page = wrapPage(app, () => null)
-        const props = Page.getInitialProps({ query: { route } })
+        const props = await Page.getInitialProps({ query: { route } })
         expect(props).toEqual({})
       })
     })
