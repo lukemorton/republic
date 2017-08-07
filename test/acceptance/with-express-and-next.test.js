@@ -19,9 +19,7 @@ describe('Application with express and next', () => {
       expect.anything(),
       expect.anything(),
       '/blog/index',
-      expect.objectContaining({
-        route: expect.objectContaining({ action: 'blog#index' })
-      })
+      expect.objectContaining({ action: 'blog#index' })
     )
   })
 })

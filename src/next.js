@@ -5,10 +5,11 @@ export function wrapPage (app, Component) {
     static displayName = `Page(${Component.displayName || Component.name})`
 
     static async getInitialProps (ctx) {
-      const { route, params, query } = ctx.query
+      const { query } = ctx
+      const route = app.route(query.action)
 
-      if (route.handler) {
-        const props = await route.handler({ ...ctx, route, params, query })
+      if (route) {
+        const props = await route.handler({ ...ctx, route, query })
 
         if (props) {
           return props
