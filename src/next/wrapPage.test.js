@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { wrapPage } from '../../src/next'
-import Upcoming from '../../src/upcoming'
+import { wrapPage } from './'
+import Upcoming from '../upcoming'
 
 describe('wrapPage()', () => {
   describe('when wrapping component with next.js page', () => {

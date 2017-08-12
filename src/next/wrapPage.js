@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function wrapPage (app, Component) {
+export default function wrapPage (app, Component) {
   return class extends React.Component {
     static displayName = `Page(${Component.displayName || Component.name})`
 
