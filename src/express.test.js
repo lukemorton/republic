@@ -1,7 +1,7 @@
 import supertest from 'supertest'
 import express from 'express'
-import { asExpressMiddleware, nextHandler } from '../../src/express'
-import Upcoming, { route } from '../../src/upcoming'
+import { asExpressMiddleware, nextHandler } from './express'
+import Upcoming, { route } from './upcoming'
 const { GET } = route
 
 describe('asExpressMiddleware', () => {

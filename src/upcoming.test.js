@@ -1,4 +1,4 @@
-import Upcoming, { route } from '../../src/upcoming'
+import Upcoming, { route } from './upcoming'
 
 describe('Upcoming', () => {
   test('module exposes route', () => {

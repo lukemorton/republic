@@ -1,5 +1,5 @@
 import sinon from 'sinon'
-import * as routes from '../../src/routes'
+import * as routes from './routes'
 
 describe('routes', () => {
   describe('when defining route', () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Form } from '../../src/react'
+import { Form } from './react'
 
 describe('Form', () => {
   describe('when javascript is not present', () => {
