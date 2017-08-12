@@ -14,7 +14,7 @@ function buildFormProps (app, action) {
 }
 
 export const Form = ({ app, action, children }, context) =>
-  <form {...buildFormProps(context.app, action)}>
+  <form {...buildFormProps(context.app || app, action)}>
     {children}
   </form>
 
