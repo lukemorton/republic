@@ -4,8 +4,8 @@
   "description": "Routing, forms, and actions for your React.",
   "main": "./upcoming.js",
   "scripts": {
-    "prepare": "babel src --out-dir lib",
-    "watch": "babel src --out-dir lib --watch",
+    "prepare": "babel src --out-dir lib --ignore *.test.js",
+    "watch": "babel src --out-dir lib --watch --ignore *.test.js",
     "test": "jest --notify"
   },
   "repository": {
