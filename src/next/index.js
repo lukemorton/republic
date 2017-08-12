@@ -1,3 +1,4 @@
 import wrapPage from './wrapPage'
+import Link from './Link'
 
-export { wrapPage }
+export { wrapPage, Link }

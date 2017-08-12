@@ -1,3 +1,4 @@
+import pathToRegexp from 'path-to-regexp'
 import * as route from './routes'
 
 export { route }
@@ -17,6 +18,14 @@ export default class Upcoming {
 
   routeHandler (action) {
     return this.route(action).handler
+  }
+
+  url (action, params) {
+    const route = this.route(action)
+
+    if (route) {
+      return pathToRegexp.compile(route.path)(params)
+    }
   }
 }
 
