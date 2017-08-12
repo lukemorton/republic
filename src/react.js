@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function buildFormProps (app, action) {
   const route = app.route(action)
@@ -12,10 +13,14 @@ function buildFormProps (app, action) {
   }
 }
 
-export const Form = ({ app, action, children }) =>
-  <form {...buildFormProps(app, action)}>
+export const Form = ({ app, action, children }, context) =>
+  <form {...buildFormProps(context.app, action)}>
     {children}
   </form>
+
+Form.contextTypes = {
+  app: PropTypes.object
+}
 
 export const Input = (props) =>
   <input {...props} />

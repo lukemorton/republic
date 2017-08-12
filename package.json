@@ -15,7 +15,9 @@
   "author": "Luke Morton",
   "license": "MIT",
   "dependencies": {
-    "lodash.compose": "^2.4.1"
+    "lodash.compose": "^2.4.1",
+    "path-to-regexp": "^1.7.0",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function wrapPage (app, Component) {
   return class extends React.Component {
@@ -17,6 +18,14 @@ export function wrapPage (app, Component) {
       }
 
       return {}
+    }
+
+    static childContextTypes = {
+      app: PropTypes.object
+    }
+
+    getChildContext () {
+      return { app }
     }
 
     render () {
