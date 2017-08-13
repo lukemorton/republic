@@ -6,6 +6,20 @@ export default new Upcoming(
     () => blog.FetchPosts({ limit: 10 })
   ]),
   route.page('/post/:slug', 'blog#show', [
-    ({ req }) => blog.FetchPostBySlug({ slug: req.params.slug })
+    ({ query, res }) => {
+      const { post } = blog.FetchPostBySlug({ slug: query.slug })
+
+      if (post) {
+        return { post }
+      }
+
+      res.redirect('/')
+    }
+  ]),
+  route.POST('/subscribe', 'blog#subscribe', [
+    async ({ req, res }) => {
+      await blog.Subscribe({ subscription: req.body })
+      res.redirect('/')
+    }
   ])
 )

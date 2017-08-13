@@ -1,15 +1,19 @@
 import express from 'express'
-import { parse } from 'url'
-import { asExpressMiddleware } from 'upcoming/express'
+import bodyParser from 'body-parser'
+import { asExpressMiddleware, nextHandler } from 'upcoming/express'
 import app from './app'
 
 export function createServer (nextApp) {
-  return express()
-    .use(
-      asExpressMiddleware(app, ({ req, res, route }) => {
-        const pagePath = `/${route.action.replace('#', '/')}`
-        return nextApp.render(req, res, pagePath, { route })
-      })
-    )
-    .get('*', (req, res) => nextApp.render(req, res, parse(req.url)))
+  const server = express()
+
+  // Handle POST data
+  server.use(bodyParser.urlencoded({ extended: true }))
+
+  // Hook up upcoming + express + next
+  server.use(asExpressMiddleware(app, nextHandler(nextApp)))
+
+  // Handle 404s and other non-upcoming pages
+  server.get('*', (req, res) => nextApp.getRequestHandler()(req, res))
+
+  return server
 }

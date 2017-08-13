@@ -9,11 +9,12 @@
   "author": "Luke Morton",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "next": "^2.4.9",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "upcoming": "@latest"
+    "upcoming": "^1.0.5"
   },
   "babel": {
     "presets": [
@@ -22,5 +23,11 @@
       "stage-2",
       "react"
     ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1"
   }
 }

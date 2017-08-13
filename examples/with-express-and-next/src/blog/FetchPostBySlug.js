@@ -8,4 +8,6 @@ export default function FetchPostBySlug ({ slug }) {
       return { post }
     }
   }
+
+  return { post: undefined }
 }
