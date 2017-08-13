@@ -13,7 +13,7 @@ function buildFormProps (app, action) {
   }
 }
 
-export const Form = ({ app, action, children }, context) =>
+const Form = ({ app, action, children }, context) =>
   <form {...buildFormProps(context.app || app, action)}>
     {children}
   </form>
@@ -22,5 +22,4 @@ Form.contextTypes = {
   app: PropTypes.object
 }
 
-export const Input = (props) =>
-  <input {...props} />
+export default Form
