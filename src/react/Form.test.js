@@ -38,4 +38,24 @@ describe('Form', () => {
       expect(form).toHaveProp('action', '/cool')
     })
   })
+
+  describe('when receiving onChange event', () => {
+    test('the form records values', () => {
+      const app = { route: () => ({ handler () {} }) }
+      const form = shallow(<Form app={app} />)
+      form.instance().handleChange('email', 'value')
+      expect(form.instance().values()).toEqual({ email: 'value' })
+    })
+  })
+
+  describe('when form submitted', () => {
+    test('the handler receives form values', () => {
+      const handler = jest.fn()
+      const app = { route: () => ({ handler }) }
+      const form = shallow(<Form app={app} />)
+      form.instance().handleChange('email', 'value')
+      form.simulate('submit', { preventDefault () {} })
+      expect(handler).toBeCalledWith(form.instance().values())
+    })
+  })
 })
