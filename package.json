@@ -15,7 +15,8 @@
   "author": "Luke Morton",
   "license": "MIT",
   "dependencies": {
-    "lodash.compose": "^2.4.1",
+    "lodash.flowright": "^3.5.0",
+    "lodash.set": "^4.3.2",
     "path-to-regexp": "^1.7.0",
     "prop-types": "^15.5.10"
   },

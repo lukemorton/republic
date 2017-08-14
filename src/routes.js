@@ -1,4 +1,4 @@
-import compose from 'lodash.compose'
+import compose from 'lodash.flowright'
 
 function createRoute (method, path, action, callbacks = []) {
   const [module, name] = action.split('#')
