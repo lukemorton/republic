@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import set from 'lodash.set'
 
 export default class Form extends React.Component {
   static contextTypes = {
@@ -40,7 +41,13 @@ export default class Form extends React.Component {
   }
 
   values () {
-    return this.state.values
+    let values = {}
+
+    for (const k in this.state.values) {
+      set(values, k, this.state.values[k])
+    }
+
+    return values
   }
 
   value (name) {

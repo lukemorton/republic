@@ -46,6 +46,13 @@ describe('Form', () => {
       form.instance().handleChange('email', 'value')
       expect(form.instance().values()).toEqual({ email: 'value' })
     })
+
+    test('the form records nested values', () => {
+      const app = { route: () => ({ handler () {} }) }
+      const form = shallow(<Form app={app} />)
+      form.instance().handleChange('user.name', 'Luke')
+      expect(form.instance().values()).toEqual({ user: { name: 'Luke' } })
+    })
   })
 
   describe('when retrieving single value', () => {
