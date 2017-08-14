@@ -1,5 +1,14 @@
 import Upcoming, { route } from 'upcoming'
+import Router from 'next/router'
 import * as blog from './src/blog'
+
+function isomorphicRedirect (res, path, nextPath) {
+  if (res) {
+    res.redirect(path)
+  } else {
+    Router.push(nextPath, path)
+  }
+}
 
 export default new Upcoming(
   route.page('/', 'blog#index', [
@@ -13,13 +22,19 @@ export default new Upcoming(
         return { post }
       }
 
-      res.redirect('/')
+      isomorphicRedirect(res, '/', {
+        pathname: '/blog/index',
+        query: { action: 'blog#index' }
+      })
     }
   ]),
   route.POST('/subscribe', 'blog#subscribe', [
-    async ({ req, res }) => {
-      await blog.Subscribe({ subscription: req.body })
-      res.redirect('/')
+    async ({ subscription, res }) => {
+      await blog.Subscribe({ subscription })
+      isomorphicRedirect(res, '/', {
+        pathname: '/blog/index',
+        query: { action: 'blog#index' }
+      })
     }
   ])
 )

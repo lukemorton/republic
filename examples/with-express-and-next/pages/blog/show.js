@@ -1,5 +1,5 @@
 import React from 'react'
-import { wrapPage } from 'upcoming/next'
+import { wrapPage, Link } from 'upcoming/next'
 import app from '../../app'
 
 export default wrapPage(app, ({ post }) =>
@@ -7,7 +7,9 @@ export default wrapPage(app, ({ post }) =>
     <main>
       <h1>{post.title}</h1>
 
-      <a href="/">Back</a>
+      <Link action='blog#index'>
+        <a>Back</a>
+      </Link>
     </main>
   </div>
 )
