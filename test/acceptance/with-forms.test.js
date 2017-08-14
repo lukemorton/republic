@@ -15,13 +15,20 @@ describe('Application with forms', () => {
 
     const form = mount(
       <Form app={app} action='blog#index'>
-        <Input name="email" />
+        <p>
+          <Input name="email" />
+        </p>
       </Form>
     )
 
     test('the form is aware of changes to input', () => {
       form.find(Input).simulate('change', { target: { value: 'new@email.com' } })
       expect(form.instance().values()).toEqual({ email: 'new@email.com' })
+    })
+
+    test('the form injects values into inputs', () => {
+      form.find(Input).simulate('change', { target: { value: 'new@email.com' } })
+      expect(form.find('input').prop('value')).toBe('new@email.com')
     })
 
     test('the form passes values to action', () => {

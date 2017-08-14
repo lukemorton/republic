@@ -7,7 +7,8 @@ export default class Form extends React.Component {
   }
 
   static childContextTypes = {
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    value: PropTypes.func
   }
 
   componentWillMount () {
@@ -15,7 +16,10 @@ export default class Form extends React.Component {
   }
 
   getChildContext () {
-    return { onChange: this.handleChange.bind(this) }
+    return {
+      onChange: this.handleChange.bind(this),
+      value: this.value.bind(this)
+    }
   }
 
   app () {
@@ -29,7 +33,7 @@ export default class Form extends React.Component {
   handleChange (name, value) {
     this.setState({
       values: {
-        ...this.state.data,
+        ...this.state.values,
         [name]: value
       }
     })
@@ -37,6 +41,10 @@ export default class Form extends React.Component {
 
   values () {
     return this.state.values
+  }
+
+  value (name) {
+    return this.state.values[name]
   }
 
   handleSubmit (e) {

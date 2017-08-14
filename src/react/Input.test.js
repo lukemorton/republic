@@ -18,6 +18,11 @@ describe('Input', () => {
       const input = shallow(<Input name='testing' />)
       expect(input.find('input')).toHaveProp('onChange')
     })
+
+    test('it sets value to undefined (uncontrolled input) by default', () => {
+      const input = shallow(<Input name='testing' />)
+      expect(input.find('input')).toHaveProp('value', undefined)
+    })
   })
 
   describe('when provided custom onChange handler via props', () => {
@@ -37,6 +42,27 @@ describe('Input', () => {
       const event = { target: { value: 'new@example.com' } }
       input.simulate('change', event)
       expect(onChange).toBeCalledWith('email', 'new@example.com')
+    })
+  })
+
+  describe('when provided value via props', () => {
+    test('it sets value', () => {
+      const input = shallow(<Input name='testing' value='cool' />)
+      expect(input.find('input')).toHaveProp('value', 'cool')
+    })
+  })
+
+  describe('when provided value() via context', () => {
+    test('it sets value provided by fn', () => {
+      const value = () => 'bob'
+      const input = shallow(<Input name='testing' />, { context: { value } })
+      expect(input.find('input')).toHaveProp('value', 'bob')
+    })
+
+    test('it sets value to empty string if fn returns undefined', () => {
+      const value = () => undefined
+      const input = shallow(<Input name='testing' />, { context: { value } })
+      expect(input.find('input')).toHaveProp('value', '')
     })
   })
 })

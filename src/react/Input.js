@@ -10,7 +10,16 @@ function buildInputProps (props, context) {
 
   return {
     ...props,
-    onChange: buildOnChange(props, context)
+    onChange: buildOnChange(props, context),
+    value: buildValue(props, context)
+  }
+}
+
+function buildValue (props, context) {
+  if (props.value) {
+    return props.value
+  } else if (context.value) {
+    return context.value(props.name) || ''
   }
 }
 
@@ -27,7 +36,8 @@ const Input = (props, context) =>
   <input {...buildInputProps(props, context)} />
 
 Input.contextTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  value: PropTypes.func
 }
 
 export default Input

@@ -48,6 +48,21 @@ describe('Form', () => {
     })
   })
 
+  describe('when retrieving single value', () => {
+    test('the form returns undefined if no value', () => {
+      const app = { route: () => ({ handler () {} }) }
+      const form = shallow(<Form app={app} />)
+      expect(form.instance().value('email')).toBeUndefined()
+    })
+
+    test('the form exposes value', () => {
+      const app = { route: () => ({ handler () {} }) }
+      const form = shallow(<Form app={app} />)
+      form.instance().handleChange('email', 'value')
+      expect(form.instance().value('email')).toBe('value')
+    })
+  })
+
   describe('when form submitted', () => {
     test('the handler receives form values', () => {
       const handler = jest.fn()
