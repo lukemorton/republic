@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import set from 'lodash.set'
+import get from 'lodash.get'
 
 export default class Form extends React.Component {
   static contextTypes = {
@@ -13,7 +14,7 @@ export default class Form extends React.Component {
   }
 
   componentWillMount () {
-    this.state = { values: {} }
+    this.state = { values: this.props.values || {} }
   }
 
   getChildContext () {
@@ -32,26 +33,17 @@ export default class Form extends React.Component {
   }
 
   handleChange (name, value) {
-    this.setState({
-      values: {
-        ...this.state.values,
-        [name]: value
-      }
-    })
+    let values = { ...this.state.values }
+    set(values, name, value)
+    this.setState({ values })
   }
 
   values () {
-    let values = {}
-
-    for (const k in this.state.values) {
-      set(values, k, this.state.values[k])
-    }
-
-    return values
+    return this.state.values
   }
 
   value (name) {
-    return this.state.values[name]
+    return get(this.state.values, name)
   }
 
   handleSubmit (e) {

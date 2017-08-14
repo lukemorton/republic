@@ -3,16 +3,24 @@ import { shallow } from 'enzyme'
 import { Form } from './'
 
 describe('Form', () => {
-  describe('when javascript is not present', () => {
+  describe('when initialising form', () => {
     test('the form has method and action props defined', () => {
       const app = { route: jest.fn(() => ({ method: 'POST', path: '/cool' })) }
       const form = shallow(<Form app={app} />)
       expect(form).toHaveProp('method', 'POST')
       expect(form).toHaveProp('action', '/cool')
     })
+
+    test('the form can be provided default values', () => {
+      const app = { route: () => ({ handler () {} }) }
+      const values = { user: { name: 'Luke' } }
+      const form = shallow(<Form app={app} values={values} />)
+      expect(form.instance().value('user.name')).toEqual('Luke')
+      expect(form.instance().values()).toEqual(values)
+    })
   })
 
-  describe('when javascript is available', () => {
+  describe('when form is submitted', () => {
     test('the route handler is called on submit', () => {
       const handler = jest.fn()
       const app = { route: () => ({ handler }) }
@@ -67,6 +75,13 @@ describe('Form', () => {
       const form = shallow(<Form app={app} />)
       form.instance().handleChange('email', 'value')
       expect(form.instance().value('email')).toBe('value')
+    })
+
+    test('the form exposes nest value', () => {
+      const app = { route: () => ({ handler () {} }) }
+      const form = shallow(<Form app={app} />)
+      form.instance().handleChange('user.name', 'Luke')
+      expect(form.instance().value('user.name')).toBe('Luke')
     })
   })
 
