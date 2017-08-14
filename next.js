@@ -1,1 +1,1 @@
-module.exports = require('./lib/next')
+module.exports = require('./lib/next/')

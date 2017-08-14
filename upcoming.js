@@ -1,1 +1,1 @@
-module.exports = require('./lib/upcoming')
+module.exports = require('./lib/upcoming.js')
