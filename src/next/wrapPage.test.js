@@ -31,37 +31,40 @@ describe('wrapPage()', () => {
     })
   })
 
-  describe('when loading props', () => {
-    describe('and handler was provided', () => {
-      test('it calls action within getInitialProps', async () => {
-        const req = { mock: true }
-        const query = { action: 'blog#index' }
-        const route = { action: 'blog#index', handler: jest.fn() }
-        const app = new Upcoming(route)
-        const Page = wrapPage(app, () => null)
-        await Page.getInitialProps({ req, query })
-        expect(route.handler).toBeCalledWith(
-          expect.objectContaining({ req, route, query })
-        )
-      })
+  describe('when providing props to component', () => {
+    const req = { mock: true }
+    const query = { action: 'blog#index' }
+    const route = { action: 'blog#index', module: 'blog', handler: jest.fn() }
+    const app = new Upcoming(route)
+    const Page = wrapPage(app, () => null)
 
-      test('it returns empty object if handler returns undefined', async () => {
-        const route = { action: 'blog#index', handler: jest.fn(() => undefined) }
-        const app = new Upcoming(route)
-        const Page = wrapPage(app, () => null)
-        const props = await Page.getInitialProps({ query: { route } })
-        expect(props).toEqual({})
+    test('it calls action within getInitialProps', async () => {
+      await Page.getInitialProps({ req, query })
+      expect(route.handler).toBeCalledWith(
+        expect.objectContaining({ req, route, query })
+      )
+    })
+
+    test('it provides handlers results as props', async () => {
+      route.handler.mockReturnValueOnce({ nice: true })
+      const props = await Page.getInitialProps({ query })
+      expect(props).toMatchObject({ nice: true })
+    })
+
+    test('it provides actions as props', async () => {
+      const props = await Page.getInitialProps({ query })
+      expect(props).toMatchObject({
+        actions: { blog: { index: route.handler } }
       })
     })
 
-    describe('and handler was not provided', () => {
-      test('it returns empty object from getInitialProps', async () => {
-        const route = { action: 'blog#index' }
-        const app = new Upcoming(route)
-        const Page = wrapPage(app, () => null)
-        const props = await Page.getInitialProps({ query: { route } })
-        expect(props).toEqual({})
-      })
+    test('it provides local actions as props', async () => {
+      const props = await Page.getInitialProps({ query: { action: 'blog#index' } })
+      expect(props).toMatchObject({ index: route.handler })
+    })
+
+    test('it raises exception when no route found', async () => {
+      expect(Page.getInitialProps({ query: { action: 'blog#show' } })).rejects.toBeDefined()
     })
   })
 

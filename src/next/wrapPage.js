@@ -9,15 +9,26 @@ export default function wrapPage (app, Component) {
       const { query } = ctx
       const route = app.route(query.action)
 
-      if (route) {
-        const props = await route.handler({ ...ctx, route, query })
-
-        if (props) {
-          return props
-        }
+      if (!route || !route.handler) {
+        throw 'Page did not match route'
       }
 
-      return {}
+      const actions = app.routeHandlersByModuleAndName()
+      const localActions = actions[route.module]
+      const props = await route.handler({ ...ctx, route, query })
+
+      if (props) {
+        return {
+          actions,
+          ...localActions,
+          ...props
+        }
+      } else {
+        return {
+          actions,
+          ...localActions
+        }
+      }
     }
 
     static childContextTypes = {
