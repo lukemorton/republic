@@ -4,10 +4,6 @@ import set from 'lodash.set'
 import get from 'lodash.get'
 
 export default class Form extends React.Component {
-  static contextTypes = {
-    app: PropTypes.object
-  }
-
   static childContextTypes = {
     onChange: PropTypes.func,
     value: PropTypes.func
@@ -22,14 +18,6 @@ export default class Form extends React.Component {
       onChange: this.handleChange.bind(this),
       value: this.value.bind(this)
     }
-  }
-
-  app () {
-    return this.props.app || this.context.app
-  }
-
-  route () {
-    return this.app().route(this.props.action)
   }
 
   handleChange (name, value) {
@@ -48,11 +36,11 @@ export default class Form extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    this.route().handler(this.values())
+    this.props.action(this.values())
   }
 
   buildProps () {
-    const { method, path } = this.route()
+    const { method, path } = this.props.action
 
     return {
       method,
