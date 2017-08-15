@@ -23,4 +23,12 @@ describe('Upcoming', () => {
     const app = new Upcoming(route)
     expect(app.routeHandler('blog#index')).toBe(route.handler)
   })
+
+  test('it returns route handlers by module and name', () => {
+    const route = { action: 'blog#subscribe', handler () {} }
+    const app = new Upcoming(route)
+    expect(app.routeHandlersByModuleAndName()).toMatchObject({
+      blog: { subscribe: route.handler }
+    })
+  })
 })

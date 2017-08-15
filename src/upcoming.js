@@ -16,6 +16,10 @@ export default class Upcoming {
     return routesByAction(this.routes())[action]
   }
 
+  routeHandlersByModuleAndName () {
+    return routeHandlersByModuleAndName(this.routes())
+  }
+
   routeHandler (action) {
     return this.route(action).handler
   }
@@ -37,4 +41,16 @@ function routesByAction (routes) {
   })
 
   return routesByAction
+}
+
+function routeHandlersByModuleAndName (routes) {
+  let routesByModuleAndName = {}
+
+  routes.forEach((route) => {
+    const [mod, name] = route.action.split('#')
+    routesByModuleAndName[mod] = routesByModuleAndName[mod] || {}
+    routesByModuleAndName[mod][name] = route.handler
+  })
+
+  return routesByModuleAndName
 }
