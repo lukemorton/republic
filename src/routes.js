@@ -3,6 +3,17 @@ import compose from 'lodash.flowright'
 function createRoute (method, path, action, callbacks = []) {
   const [module, name] = action.split('#')
 
+  async function handler (ctx) {
+    if (callbacks.length > 0) {
+      const middleware = [...callbacks]
+      const fn = middleware.pop()
+      return await compose(...middleware)(fn)(ctx)
+    }
+  }
+
+  handler.method = method
+  handler.path = path
+
   return {
     method,
     path,
@@ -12,13 +23,7 @@ function createRoute (method, path, action, callbacks = []) {
     isPage () {
       return false
     },
-    async handler (ctx) {
-      if (callbacks.length > 0) {
-        const middleware = [...callbacks]
-        const fn = middleware.pop()
-        return await compose(...middleware)(fn)(ctx)
-      }
-    }
+    handler
   }
 }
 

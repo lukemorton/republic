@@ -9,6 +9,12 @@ describe('routes', () => {
       expect(route.name).toBe('index')
     })
 
+    test('it defines method and path on handler', () => {
+      const { handler } = routes.page('/', 'blog#index')
+      expect(handler.method).toBe('GET')
+      expect(handler.path).toBe('/')
+    })
+
     describe('and no callbacks provided', () => {
       test('it returns undefined', async () => {
         const route = routes.page('/', 'blog#index')
