@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import { wrapPage } from './'
 import Upcoming from '../upcoming'
 
@@ -8,25 +8,26 @@ describe('wrapPage()', () => {
     test('it defines display name with Component.displayName', () => {
       const Component = () => <div>Testing</div>
       Component.displayName = 'CustomName'
-      const Page = wrapPage(null, Component)
+      const Page = wrapPage(new Upcoming, Component)
       expect(Page.displayName).toBe('Page(CustomName)')
     })
 
     test('it defines display name with Component.name', () => {
       const Component = () => <div>Testing</div>
-      const Page = wrapPage(null, Component)
+      const Page = wrapPage(new Upcoming, Component)
       expect(Page.displayName).toBe('Page(Component)')
     })
 
     test('it defines .getInitialProps()', () => {
-      const Page = wrapPage(null, () => null)
+      const Page = wrapPage(new Upcoming, () => null)
       expect(Page.getInitialProps).toBeTruthy()
     })
 
     test('it passes props to wrapped component', () => {
       const Component = () => <div>Testing</div>
-      const Page = wrapPage(null, Component)
-      const page = mount(<Page testing />)
+      const route = { action: 'blog#index', module: 'blog', handler: jest.fn() }
+      const Page = wrapPage(new Upcoming(route), Component)
+      const page = mount(<Page action='blog#index' testing />)
       expect(page.find(Component)).toHaveProp('testing')
     })
   })
@@ -38,7 +39,7 @@ describe('wrapPage()', () => {
     const app = new Upcoming(route)
     const Page = wrapPage(app, () => null)
 
-    test('it calls action within getInitialProps', async () => {
+    test('it calls handler within getInitialProps', async () => {
       await Page.getInitialProps({ req, query })
       expect(route.handler).toBeCalledWith(
         expect.objectContaining({ req, route, query })
@@ -52,15 +53,15 @@ describe('wrapPage()', () => {
     })
 
     test('it provides actions as props', async () => {
-      const props = await Page.getInitialProps({ query })
-      expect(props).toMatchObject({
+      const page = shallow(<Page action={route.action} />)
+      expect(page.props()).toMatchObject({
         actions: { blog: { index: route.handler } }
       })
     })
 
     test('it provides local actions as props', async () => {
-      const props = await Page.getInitialProps({ query: { action: 'blog#index' } })
-      expect(props).toMatchObject({ index: route.handler })
+      const page = shallow(<Page action={route.action} />)
+      expect(page.props()).toMatchObject({ index: route.handler })
     })
 
     test('it raises exception when no route found', async () => {
@@ -70,8 +71,9 @@ describe('wrapPage()', () => {
 
   describe('when renderering', () => {
     test('it renders Component', () => {
-      const Page = wrapPage(null, () => <div>Testing</div>)
-      expect(mount(<Page />)).toHaveText('Testing')
+      const route = { action: 'blog#index', module: 'blog', handler: jest.fn() }
+      const Page = wrapPage(new Upcoming(route), () => <div>Testing</div>)
+      expect(mount(<Page action='blog#index' />)).toHaveText('Testing')
     })
   })
 })

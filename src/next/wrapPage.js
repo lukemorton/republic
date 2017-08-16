@@ -13,21 +13,12 @@ export default function wrapPage (app, Component) {
         throw 'Page did not match route'
       }
 
-      const actions = app.routeHandlersByModuleAndName()
-      const localActions = actions[route.module]
       const props = await route.handler({ ...ctx, route, query })
 
       if (props) {
-        return {
-          actions,
-          ...localActions,
-          ...props
-        }
+        return { ...props, action: query.action }
       } else {
-        return {
-          actions,
-          ...localActions
-        }
+        return { action: query.action }
       }
     }
 
@@ -40,7 +31,10 @@ export default function wrapPage (app, Component) {
     }
 
     render () {
-      return <Component {...this.props} />
+      const actions = app.routeHandlersByModuleAndName()
+      const route = app.route(this.props.action)
+      const localActions = actions[route.module]
+      return <Component actions={actions} {...localActions} {...this.props} />
     }
   }
 }
