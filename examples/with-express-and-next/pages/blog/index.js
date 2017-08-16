@@ -4,13 +4,12 @@ import { wrapPage, Link } from 'upcoming/next'
 import { Form, Input } from 'upcoming/react'
 import app from '../../app'
 
-const Post = (app) => ({ title, slug }, i) => {
-  return <li key={i}>
+const Post = (app) => ({ title, slug }, i) =>
+  <li key={i}>
     <Link action='blog#show' params={{ slug }}>
       <a>{title}</a>
     </Link>
   </li>
-}
 
 export default wrapPage(app, ({ posts, subscribe }) =>
   <div>
@@ -27,7 +26,7 @@ export default wrapPage(app, ({ posts, subscribe }) =>
       </div>
     </main>
     <aside>
-      <Form action='blog#subscribe'>
+      <Form action={subscribe}>
         <p>
           <label htmlFor='email'>Subscribe your email address:</label>
           <Input type='text' name='subscription.email' id='email' />

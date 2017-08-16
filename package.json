@@ -1,6 +1,6 @@
 {
   "name": "upcoming",
-  "version": "1.0.9",
+  "version": "1.0.18",
   "description": "Routing, forms, and actions for your React.",
   "main": "./upcoming.js",
   "scripts": {
