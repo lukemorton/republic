@@ -1,4 +1,4 @@
-import Upcoming, { route } from 'upcoming'
+import Republic, { route } from 'republic'
 import Router from 'next/router'
 import * as blog from './src/blog'
 
@@ -10,7 +10,7 @@ function isomorphicRedirect (res, path, nextPath) {
   }
 }
 
-export default new Upcoming(
+export default new Republic(
   route.page('/', 'blog#index', [
     () => blog.FetchPosts({ limit: 10 })
   ]),

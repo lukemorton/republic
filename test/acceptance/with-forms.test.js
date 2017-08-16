@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Upcoming from '../../src/upcoming'
+import Republic from '../../src/republic'
 import { Form, Input } from '../../src/react/'
 
 describe('Application with forms', () => {

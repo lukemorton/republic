@@ -1,10 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Link } from './'
-import Upcoming from '../upcoming'
+import Republic from '../republic'
 
 describe('Link', () => {
-  const app = new Upcoming({
+  const app = new Republic({
     path: '/blog',
     action: 'blog#index'
   })

@@ -1,6 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import { asExpressMiddleware, nextHandler } from 'upcoming/express'
+import { asExpressMiddleware, nextHandler } from 'republic/express'
 import app from './app'
 
 export function createServer (nextApp) {

@@ -1,32 +1,32 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { wrapPage } from './'
-import Upcoming from '../upcoming'
+import Republic from '../republic'
 
 describe('wrapPage()', () => {
   describe('when wrapping component with next.js page', () => {
     test('it defines display name with Component.displayName', () => {
       const Component = () => <div>Testing</div>
       Component.displayName = 'CustomName'
-      const Page = wrapPage(new Upcoming, Component)
+      const Page = wrapPage(new Republic, Component)
       expect(Page.displayName).toBe('Page(CustomName)')
     })
 
     test('it defines display name with Component.name', () => {
       const Component = () => <div>Testing</div>
-      const Page = wrapPage(new Upcoming, Component)
+      const Page = wrapPage(new Republic, Component)
       expect(Page.displayName).toBe('Page(Component)')
     })
 
     test('it defines .getInitialProps()', () => {
-      const Page = wrapPage(new Upcoming, () => null)
+      const Page = wrapPage(new Republic, () => null)
       expect(Page.getInitialProps).toBeTruthy()
     })
 
     test('it passes props to wrapped component', () => {
       const Component = () => <div>Testing</div>
       const route = { action: 'blog#index', module: 'blog', handler: jest.fn() }
-      const Page = wrapPage(new Upcoming(route), Component)
+      const Page = wrapPage(new Republic(route), Component)
       const page = mount(<Page action='blog#index' testing />)
       expect(page.find(Component)).toHaveProp('testing')
     })
@@ -36,7 +36,7 @@ describe('wrapPage()', () => {
     const req = { mock: true }
     const query = { action: 'blog#index' }
     const route = { action: 'blog#index', module: 'blog', handler: jest.fn() }
-    const app = new Upcoming(route)
+    const app = new Republic(route)
     const Page = wrapPage(app, () => null)
 
     test('it calls handler within getInitialProps', async () => {
@@ -72,7 +72,7 @@ describe('wrapPage()', () => {
   describe('when renderering', () => {
     test('it renders Component', () => {
       const route = { action: 'blog#index', module: 'blog', handler: jest.fn() }
-      const Page = wrapPage(new Upcoming(route), () => <div>Testing</div>)
+      const Page = wrapPage(new Republic(route), () => <div>Testing</div>)
       expect(mount(<Page action='blog#index' />)).toHaveText('Testing')
     })
   })

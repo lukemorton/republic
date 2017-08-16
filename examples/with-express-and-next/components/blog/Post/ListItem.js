@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'upcoming/next'
+import { Link } from 'republic/next'
 
 export default ({ title, slug }, i) =>
   <li key={i}>

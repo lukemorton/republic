@@ -3,7 +3,7 @@ import * as route from './routes'
 
 export { route }
 
-export default class Upcoming {
+export default class Republic {
   constructor (...routes) {
     this._routes = routes
   }

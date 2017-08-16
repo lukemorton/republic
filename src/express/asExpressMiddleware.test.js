@@ -1,12 +1,12 @@
 import supertest from 'supertest'
 import express from 'express'
 import { asExpressMiddleware } from './'
-import Upcoming, { route } from '../upcoming'
+import Republic, { route } from '../republic'
 const { GET } = route
 
 describe('asExpressMiddleware', () => {
   const route = GET('/api/blog/posts', 'api/blog#posts')
-  const app = new Upcoming(route)
+  const app = new Republic(route)
   let handler
   let server
 

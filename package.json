@@ -1,8 +1,8 @@
 {
-  "name": "upcoming",
-  "version": "1.0.18",
+  "name": "republic",
+  "version": "0.2.1",
   "description": "Routing, forms, and actions for your React.",
-  "main": "./upcoming.js",
+  "main": "./republic.js",
   "scripts": {
     "prepare": "babel src --out-dir lib --ignore *.test.js",
     "watch": "babel src --out-dir lib --watch --ignore *.test.js",

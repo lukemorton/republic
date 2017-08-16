@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input } from 'upcoming/react'
+import { Form, Input } from 'republic/react'
 
 export default ({ subscribe }) =>
   <Form action={subscribe}>

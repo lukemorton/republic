@@ -1,5 +1,5 @@
 import React from 'react'
-import { wrapPage } from 'upcoming/next'
+import { wrapPage } from 'republic/next'
 import app from '../../app'
 import PostList from '../../components/blog/Post/List'
 import SubscriptionForm from '../../components/blog/Subscription/Form'
