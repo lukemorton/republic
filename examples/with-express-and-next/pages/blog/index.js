@@ -1,40 +1,22 @@
 import React from 'react'
-import Router from 'next/router'
-import { wrapPage, Link } from 'upcoming/next'
-import { Form, Input } from 'upcoming/react'
+import { wrapPage } from 'upcoming/next'
 import app from '../../app'
-
-const Post = (app) => ({ title, slug }, i) =>
-  <li key={i}>
-    <Link action='blog#show' params={{ slug }}>
-      <a>{title}</a>
-    </Link>
-  </li>
+import PostList from '../../components/blog/Post/List'
+import SubscriptionForm from '../../components/blog/Subscription/Form'
 
 export default wrapPage(app, ({ posts, subscribe }) =>
   <div>
     <main>
       <h1>Welcome</h1>
 
-      <div>
-        <h2>Blog posts</h2>
-
-        <ul>
-          {posts.map(Post(app))}
-          {Post({ title: "ob", slug: "ob" }, 3)}
-        </ul>
-      </div>
+      <PostList
+        title={<h2>Blog posts</h2>}
+        posts={posts}
+        />
     </main>
+
     <aside>
-      <Form action={subscribe}>
-        <p>
-          <label htmlFor='email'>Subscribe your email address:</label>
-          <Input type='text' name='subscription.email' id='email' />
-        </p>
-        <p>
-          <button>Subscribe</button>
-        </p>
-      </Form>
+      <SubscriptionForm subscribe={subscribe} />
     </aside>
   </div>
 )
