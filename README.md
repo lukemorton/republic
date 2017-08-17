@@ -13,11 +13,11 @@ If you miss the days of Rails forms and controllers, you'll love Republic.
 
 ## Getting started
 
-We have a lovely document for creating an application from scratch using Express + Next.js + Republic. [Read it to get started.](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)
+We have a lovely document for creating an application from scratch using Express + Next.js + Republic. The guide is a complete walkthrough that's ideal for first time users. [Read it to get started.](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)
 
 ## Quick install
 
-If you are familiar with Republic or you're just feeling brave you can use this quick start instead of the [getting started guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md).
+If you are familiar with Republic or you're just feeling brave you can use this quick start instead of the [getting started guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md). It's particularly ideal if you need a check list for adding Republic to your new application.
 
 ### Set up Express + Next.js
 
