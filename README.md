@@ -7,9 +7,9 @@ Republic is a library for React that gives you isomorphic routing, forms, and ac
 
 If you miss the days of Rails forms and controllers, you'll love Republic.
 
-- [Getting started - for those who haven't used Republic before ](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)
-- [Quick start - for those in a rush](#quick-install)
-- [Documentation - for a reference of all the parts to Republic](#documentation)
+- **[Getting started](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)** - for those who haven't used Republic before
+- **[Quick start](#quick-install)** - for those in a rush
+- **[Documentation](#documentation)** - for a reference of all the parts to Republic
 
 ## Getting started
 
