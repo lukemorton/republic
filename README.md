@@ -7,19 +7,84 @@ Republic is a library for React that gives you isomorphic routing, forms, and ac
 
 If you miss the days of Rails forms and controllers, you'll love Republic.
 
+- [Getting started - for those who haven't used Republic before ](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)
+- [Quick start - for those in a rush](#quick-install)
+- [Documentation - for a reference of all the parts to Republic](#documentation)
+
 ## Getting started
 
 We have a lovely document for creating an application from scratch using Express + Next.js + Republic. [Read it to get started.](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)
 
-## Quick start
+## Quick install
 
-To be completed...
+If you are familiar with Republic or you're just feeling brave you can use this quick start instead of the [getting started guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md).
+
+### Set up Express + Next.js
+
+Use Next.js's [example of custom server using Express](https://github.com/zeit/next.js/tree/master/examples/custom-server-express) to setup your app ready to install Republic.
+
+### Defining your routes
+
+Create an `app.js` file in the root of your application, or any where else, just remember to adjust the path when copying examples.
+
+``` js
+import Republic, { route } from 'republic'
+
+export default new Republic(
+  route.page('/blog', 'blog#index')
+)
+```
+
+### Defining your pages
+
+Create a Next.js page in a directory that matches the action. For example with an action of 'blog#index' you should place your page in `pages/blog/index.js`.
+
+You need to make sure you wrap your page with `wrapPage()`.
+
+``` js
+import React from 'react'
+import { wrapPage } from 'republic/next'
+import app from '../../app'
+
+export default wrapPage(app, () =>
+  <div>
+    <h1>Hello world</h1>
+  </div>
+)
+```
+
+That's your page setup.
+
+### Setting up republic
+
+Install republic first with:
 
 ```
 npm install --save republic
 ```
 
-## Usage
+Now add two middleware to your Express setup. The following code adds parsing for POST data.
+
+``` js
+// Handle POST data
+import bodyParser from 'body-parser'
+server.use(bodyParser.urlencoded({ extended: true }))
+```
+
+And then we add republic into the mix:
+
+``` js
+// Hook up upcoming + express + next
+import { asExpressMiddleware, nextHandler } from 'republic/express'
+import app from './app'
+server.use(asExpressMiddleware(app, nextHandler(nextApp)))
+```
+
+Make sure the path to your app file is correct.
+
+Now you should be able to run the app and visit `/blog` or whatever your URL was.
+
+## Documentation
 
 To be completed...
 
@@ -32,21 +97,6 @@ To be completed...
 ### <Form>
 
 ### <Input>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Roadmap
 
