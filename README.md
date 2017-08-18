@@ -112,3 +112,5 @@ To be completed...
 - [ ] Allow Form to have custom onSubmit
 - [ ] Update route builders to accept middleware as arguments, array as single argument, or mix of both like Express
 - [ ] Upcoming middleware: how to, make sure API is easy to understand, etc.
+- [ ] Abstract pages away from Next.js
+- [x] Pass rails-like params into handlers
