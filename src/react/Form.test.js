@@ -20,7 +20,7 @@ describe('Form', () => {
     test('the form can be provided default values', () => {
       const values = { user: { name: 'Luke' } }
       const form = shallow(<Form action={mockAction()} values={values} />)
-      expect(form.instance().value('user.name')).toEqual('Luke')
+      expect(form.instance().value('user[name]')).toEqual('Luke')
       expect(form.instance().values()).toEqual(values)
     })
   })
@@ -50,7 +50,7 @@ describe('Form', () => {
 
     test('the form records nested values', () => {
       const form = shallow(<Form action={mockAction()} />)
-      form.instance().handleChange('user.name', 'Luke')
+      form.instance().handleChange('user[name]', 'Luke')
       expect(form.instance().values()).toEqual({ user: { name: 'Luke' } })
     })
   })
@@ -69,8 +69,8 @@ describe('Form', () => {
 
     test('the form exposes nest value', () => {
       const form = shallow(<Form action={mockAction()} />)
-      form.instance().handleChange('user.name', 'Luke')
-      expect(form.instance().value('user.name')).toBe('Luke')
+      form.instance().handleChange('user[name]', 'Luke')
+      expect(form.instance().value('user[name]')).toBe('Luke')
     })
   })
 

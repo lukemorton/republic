@@ -6,7 +6,7 @@ export default ({ subscribe }) =>
     <p>
       <label htmlFor='email'>Subscribe your email address:</label>
 
-      <Input type='text' name='subscription.email' id='email' />
+      <Input type='text' name='subscription[email]' id='email' />
     </p>
 
     <p>
