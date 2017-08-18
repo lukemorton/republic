@@ -11,30 +11,26 @@ function isomorphicRedirect (res, path, nextPath) {
 }
 
 export default new Republic(
-  route.page('/', 'blog#index', [
-    () => blog.FetchPosts({ limit: 10 })
-  ]),
-  route.page('/post/:slug', 'blog#show', [
-    ({ params, res }) => {
-      const { post } = blog.FetchPostBySlug({ slug: params.slug })
+  route.page('/', 'blog#index', () => blog.FetchPosts({ limit: 10 })),
 
-      if (post) {
-        return { post }
-      }
+  route.page('/post/:slug', 'blog#show', ({ params, res }) => {
+    const { post } = blog.FetchPostBySlug({ slug: params.slug })
 
-      isomorphicRedirect(res, '/', {
-        pathname: '/blog/index',
-        query: { action: 'blog#index' }
-      })
+    if (post) {
+      return { post }
     }
-  ]),
-  route.POST('/subscribe', 'blog#subscribe', [
-    async ({ params, res }) => {
-      await blog.Subscribe({ subscription: params.subscription })
-      isomorphicRedirect(res, '/', {
-        pathname: '/blog/index',
-        query: { action: 'blog#index' }
-      })
-    }
-  ])
+
+    isomorphicRedirect(res, '/', {
+      pathname: '/blog/index',
+      query: { action: 'blog#index' }
+    })
+  }),
+
+  route.POST('/subscribe', 'blog#subscribe', async ({ params, res }) => {
+    await blog.Subscribe({ subscription: params.subscription })
+    isomorphicRedirect(res, '/', {
+      pathname: '/blog/index',
+      query: { action: 'blog#index' }
+    })
+  })
 )

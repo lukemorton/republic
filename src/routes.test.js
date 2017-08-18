@@ -75,6 +75,19 @@ describe('routes', () => {
         expect(await route.handler({})).toEqual(['bob', 'cat', 'dog', 'fox'])
       })
     })
+
+    describe('and callbacks provided as variadic arguments', () => {
+      test('it continues stack once next called', async () => {
+        const route = routes.page('/', 'blog#index',
+          (next) => async (ctx) => ['bob', ...await next(ctx)],
+          (next) => async (ctx) => ['cat', ...await next(ctx)],
+          (next) => async (ctx) => ['dog', ...await next(ctx)],
+                    async (ctx) => ['fox']
+        )
+
+        expect(await route.handler({})).toEqual(['bob', 'cat', 'dog', 'fox'])
+      })
+    })
   })
 
   describe('page', () => {

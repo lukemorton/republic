@@ -1,7 +1,8 @@
 import compose from 'lodash.flowright'
 
-function createRoute (method, path, action, callbacks = []) {
+function createRoute (method, path, action, ...callbacks) {
   const [module, name] = action.split('#')
+  callbacks = callbacks.length > 0 ? [].concat.apply([], callbacks) : []
 
   async function handler (ctx) {
     if (callbacks.length > 0) {
@@ -27,23 +28,23 @@ function createRoute (method, path, action, callbacks = []) {
   }
 }
 
-export function page (path, action, callbacks) {
+export function page (path, action, ...callbacks) {
   return {
-    ...createRoute('GET', path, action, callbacks),
+    ...createRoute('GET', path, action, ...callbacks),
     isPage () {
       return true
     }
   }
 }
 
-export function GET (path, action, callbacks) {
-  return createRoute('GET', path, action, callbacks)
+export function GET (path, action, ...callbacks) {
+  return createRoute('GET', path, action, ...callbacks)
 }
 
-export function POST (path, action, callbacks) {
-  return createRoute('POST', path, action, callbacks)
+export function POST (path, action, ...callbacks) {
+  return createRoute('POST', path, action, ...callbacks)
 }
 
-export function DELETE (path, action, callbacks) {
-  return createRoute('DELETE', path, action, callbacks)
+export function DELETE (path, action, ...callbacks) {
+  return createRoute('DELETE', path, action, ...callbacks)
 }
