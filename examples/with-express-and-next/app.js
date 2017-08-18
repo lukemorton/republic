@@ -2,7 +2,7 @@ import Republic, { route } from 'republic'
 import Router from 'next/router'
 import * as blog from './src/blog'
 
-function isomorphicRedirect (res, path, nextPath) {
+function redirect (res, path, nextPath) {
   if (res) {
     res.redirect(path)
   } else {
@@ -20,7 +20,7 @@ export default new Republic(
       return { post }
     }
 
-    isomorphicRedirect(res, '/', {
+    redirect(res, '/', {
       pathname: '/blog/index',
       query: { action: 'blog#index' }
     })
@@ -28,7 +28,7 @@ export default new Republic(
 
   route.POST('/subscribe', 'blog#subscribe', async ({ params, res }) => {
     await blog.Subscribe({ subscription: params.subscription })
-    isomorphicRedirect(res, '/', {
+    redirect(res, '/', {
       pathname: '/blog/index',
       query: { action: 'blog#index' }
     })

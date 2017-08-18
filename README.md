@@ -3,7 +3,7 @@
 ![Plato](https://upload.wikimedia.org/wikipedia/commons/4/4a/Plato-raphael.jpg)  
 [![npm version](https://badge.fury.io/js/republic.svg)](https://badge.fury.io/js/republic)
 
-Republic is a library for React that gives you isomorphic routing, forms, and actions. It currently is built to work with Express + Next.js but has been built in mind that these may not always be the stack of choice.
+Republic is a library for React that gives you universal routing, forms, and actions. It currently is built to work with Express + Next.js but has been built in mind that these may not always be the stack of choice.
 
 If you miss the days of Rails forms and controllers, you'll love Republic.
 
@@ -108,6 +108,7 @@ To be completed...
 
 **Nice to haves:**
 
+- [ ] Universal redirect
 - [ ] Provide all common form inputs
 - [ ] Allow Form to have custom onSubmit
 - [x] Update route builders to accept middleware as arguments, array as single argument, or mix of both like Express

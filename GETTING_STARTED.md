@@ -104,7 +104,7 @@ We then need to start configuring our middleware for the Express server.
 server.use(bodyParser.urlencoded({ extended: true }))
 ```
 
-We then setup the bodyParse middleware for decoding POST data. This is required by Republic in order to provide isomorphic actions (controllers in Rails-speak).
+We then setup the bodyParse middleware for decoding POST data. This is required by Republic in order to provide universal actions (controllers in Rails-speak).
 
 Next up we need to connect the dots.
 
