@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 function hrefFor (action, params) {
   return {
     pathname: `/${action.replace('#', '/')}`,
-    query: { action, ...params }
+    query: { action, params }
   }
 }
 

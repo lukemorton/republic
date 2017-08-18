@@ -7,6 +7,9 @@ describe('Link', () => {
   const app = new Republic({
     path: '/blog',
     action: 'blog#index'
+  }, {
+    path: '/blog/:slug',
+    action: 'blog#show'
   })
 
   describe('when building a link', () => {
@@ -18,9 +21,22 @@ describe('Link', () => {
       })
     })
 
+    test('it correctly builds href with params', () => {
+      const link = shallow(<Link app={app} action='blog#show' params={{ slug: 'awesome-post' }}><a>Blog</a></Link>)
+      expect(link).toHaveProp('href', {
+        pathname: '/blog/show',
+        query: { action: 'blog#show', params: { slug: 'awesome-post' } }
+      })
+    })
+
     test('it correctly builds as', () => {
       const link = shallow(<Link app={app} action='blog#index'><a>Blog</a></Link>)
       expect(link).toHaveProp('as', '/blog')
+    })
+
+    test('it correctly builds as with params', () => {
+      const link = shallow(<Link app={app} action='blog#show' params={{ slug: 'awesome-post' }}><a>Blog</a></Link>)
+      expect(link).toHaveProp('as', '/blog/awesome-post')
     })
   })
 
