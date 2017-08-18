@@ -15,8 +15,8 @@ export default new Republic(
     () => blog.FetchPosts({ limit: 10 })
   ]),
   route.page('/post/:slug', 'blog#show', [
-    ({ query, res }) => {
-      const { post } = blog.FetchPostBySlug({ slug: query.slug })
+    ({ params, res }) => {
+      const { post } = blog.FetchPostBySlug({ slug: params.slug })
 
       if (post) {
         return { post }
@@ -29,8 +29,8 @@ export default new Republic(
     }
   ]),
   route.POST('/subscribe', 'blog#subscribe', [
-    async ({ subscription, res }) => {
-      await blog.Subscribe({ subscription })
+    async ({ params, res }) => {
+      await blog.Subscribe({ subscription: params.subscription })
       isomorphicRedirect(res, '/', {
         pathname: '/blog/index',
         query: { action: 'blog#index' }

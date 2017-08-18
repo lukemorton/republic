@@ -18,7 +18,7 @@ describe('routes', () => {
     describe('and no callbacks provided', () => {
       test('it returns undefined', async () => {
         const route = routes.page('/', 'blog#index')
-        expect(await route.handler()).toBeUndefined()
+        expect(await route.handler({})).toBeUndefined()
       })
     })
 
@@ -28,7 +28,7 @@ describe('routes', () => {
         const route = routes.page('/', 'blog#index', [
           () => expectedReturn
         ])
-        expect(await route.handler()).toEqual(expectedReturn)
+        expect(await route.handler({})).toEqual(expectedReturn)
       })
     })
 

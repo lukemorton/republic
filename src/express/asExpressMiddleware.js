@@ -2,11 +2,15 @@ import express from 'express'
 
 function wrapHandler (handler) {
   return function ({ req, res, route }) {
+    let ctx = { req, res, route }
+
     if (route.isPage()) {
-      return handler({ req, res, route })
+      ctx.params = { ...req.query, ...req.params }
     } else {
-      return handler({ req, res, route, ...req.body })
+      ctx.params = { ...req.query, ...req.params, ...req.body }
     }
+
+    return handler(ctx)
   }
 }
 
