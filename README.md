@@ -111,12 +111,54 @@ export default app.page(({ post }) =>
 
 ### Universal Forms
 
-Republic provides universal forms
+Republic provides universal forms that handle state management for you. No longer do you need to define your own onChange handlers, a huge bug bear for those coming from Rails. Also, because Republic provides universal forms, the form can be handled both server side if JavaScript is not available, or in the client if it is.
+
+#### Defining an Action Handler for your Form
+
+Before we build our form, we first want to define our action handler that will be called on submit. The process is similar to defining a page route.
+
+``` js
+import Republic, { route } from 'republic/next'
+import blog from './src/blog/'
+
+export default new Republic(
+  route.page('/blog', 'blog#index', () => {
+    return { posts: blog.FetchLatestBlogPosts() }
+  }),
+  
+  route.POST('/blog/subscribe', 'blog#subscribe', async ({ params, redirectTo }) => {
+    await blog.Subscribe(params.email)
+    redirectTo('blog#index')
+  })
+)
+```
+
+This action will handle a new subscription to the blog's mailing list. Once the subscription has been created, we then redirect the user back to the blog index page.
+
+#### Building your Form
+
+Now we have defined our action handler, we can use it in a form. Within our `'blog#index'` page we can define our form and pass our action into it.
+
+``` jsx
+import React from 'react'
+import { Form, Input } from 'republic/react'
+import app from '../../app'
+import PostList from '../../components/PostList'
+
+export default app.page(({ posts, subscribe }) =>
+  <Form action={subscribe}>
+    <Input type='email' name='subscription[email]' />
+    <button>Subscribe</button>
+  </Form>
+)
+```
+
+Because `'blog#index'` is in the same controller as `'blog#subscribe'` the subscribe action handler is automatically passed into the props of the page. You can see this handler is then passed into the `<Form>`'s `action` prop. The handler will be called onSubmit with the form data, or handled on the server if JavaScript is not available.
 
 ## Documentation
 
 - **[Installation](#installation)** - how to install Republic
-- **[new Republic](#new-republic)** - how to define your Republic application
+- **[`new Republic`](#new-republic)** - how to define your Republic application
 - **[`app.page()`](#apppage)** - how to define a Republic page
 - **[`app.url()`](#appurl)** - how to build a URL
 - **[`<Link>`](#link)** - how to link to other pages
