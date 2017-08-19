@@ -27,6 +27,7 @@ describe('Republic (Next)', () => {
       const [route] = app.routes()
       route.handler({})
       expect(handler).toBeCalledWith(
+        {},
         expect.objectContaining({ redirectTo: expect.any(Function) })
       )
     })

@@ -43,7 +43,8 @@ describe('wrapPage()', () => {
     test('it calls handler within getInitialProps', async () => {
       await Page.getInitialProps({ req, query })
       expect(route.handler).toBeCalledWith(
-        expect.objectContaining({ req, route, query, params })
+        params,
+        expect.objectContaining({ req, route, query })
       )
     })
 

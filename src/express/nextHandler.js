@@ -6,7 +6,7 @@ export default function nextHandler (nextApp) {
     if (route.isPage()) {
       return nextApp.render(req, res, pagePath, query)
     } else {
-      return route.handler({ req, res, route, params })
+      return route.handler(params, { req, res, route })
     }
   }
 }

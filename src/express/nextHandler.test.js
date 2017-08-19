@@ -35,6 +35,6 @@ describe('nextHandler', () => {
     const adapter = nextHandler(next)
     const route = createActionRoute()
     adapter({ req, res, route, params })
-    expect(route.handler).toBeCalledWith({ req, res, route, params })
+    expect(route.handler).toBeCalledWith(params, { req, res, route })
   })
 })

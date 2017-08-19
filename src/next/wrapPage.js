@@ -14,7 +14,7 @@ export default function wrapPage (app, Component) {
         throw 'Page did not match route'
       }
 
-      const props = await route.handler({ ...ctx, route, params })
+      const props = await route.handler(params, { ...ctx, route })
 
       if (props) {
         return { ...props, action }

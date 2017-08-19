@@ -4,11 +4,11 @@ function createRoute (method, path, action, ...callbacks) {
   const [module, name] = action.split('#')
   callbacks = callbacks.length > 0 ? [].concat.apply([], callbacks) : []
 
-  async function handler (ctx) {
+  async function handler (params, ctx = {}) {
     if (callbacks.length > 0) {
       const middleware = [...callbacks]
       const fn = middleware.pop()
-      return await compose(...middleware)(fn)(ctx)
+      return await compose(...middleware)(fn)({ params, ...ctx })
     }
   }
 
