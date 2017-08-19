@@ -1,10 +1,9 @@
 import React from 'react'
-import { wrapPage } from 'republic/next'
 import app from '../../app'
 import PostList from '../../components/blog/Post/List'
 import SubscriptionForm from '../../components/blog/Subscription/Form'
 
-export default wrapPage(app, ({ posts, subscribe }) =>
+export default app.page(({ posts, subscribe }) =>
   <div>
     <main>
       <h1>Welcome</h1>

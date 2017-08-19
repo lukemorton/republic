@@ -28,7 +28,7 @@ Republic has the idea of an application object. This object represents the route
 Create an `app.js` file in your applications root directory with the following:
 
 ``` js
-import Republic, { route } from 'republic'
+import Republic, { route } from 'republic/next'
 
 export default new Republic(
   route.page('/', 'blog#index')
@@ -134,17 +134,16 @@ Okay now lets setup our page. This isn't quite the same as in Next.js, as to get
 
 ``` js
 import React from 'react'
-import { wrapPage } from 'republic/next'
 import app from '../../app'
 
-export default wrapPage(app, () =>
+export default app.page(() =>
   <div>
     <h1>Hello world</h1>
   </div>
 )
 ```
 
-The super powers come from the `wrapPage(app, ...)`.
+The super powers come from the `app.page()`.
 
 Before we go any further, boot up the application to see if everything is working as expected.
 

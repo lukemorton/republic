@@ -28,7 +28,7 @@ Use Next.js's [example of custom server using Express](https://github.com/zeit/n
 Create an `app.js` file in the root of your application, or any where else, just remember to adjust the path when copying examples.
 
 ``` js
-import Republic, { route } from 'republic'
+import Republic, { route } from 'republic/next'
 
 export default new Republic(
   route.page('/blog', 'blog#index')
@@ -39,14 +39,13 @@ export default new Republic(
 
 Create a Next.js page in a directory that matches the action. For example with an action of 'blog#index' you should place your page in `pages/blog/index.js`.
 
-You need to make sure you wrap your page with `wrapPage()`.
+You need to make sure you wrap your page with `app.page()`.
 
 ``` js
 import React from 'react'
-import { wrapPage } from 'republic/next'
 import app from '../../app'
 
-export default wrapPage(app, () =>
+export default app.page(() =>
   <div>
     <h1>Hello world</h1>
   </div>
@@ -108,10 +107,12 @@ To be completed...
 
 **Nice to haves:**
 
-- [ ] Universal redirect
-- [ ] Provide all common form inputs
-- [ ] Allow Form to have custom onSubmit
 - [x] Update route builders to accept middleware as arguments, array as single argument, or mix of both like Express
-- [ ] Upcoming middleware: how to, make sure API is easy to understand, etc.
-- [ ] Abstract pages away from Next.js
 - [x] Pass rails-like params into handlers
+- [ ] Convention for express + next (helper wrappers)
+- [ ] Form error handling
+- [ ] Universal redirect
+- [ ] Abstract pages away from Next.js
+- [ ] Allow Form to have custom onSubmit
+- [ ] Provide all common form inputs
+- [ ] Upcoming middleware: how to, make sure API is easy to understand, etc.
