@@ -8,7 +8,7 @@ Republic is a library for React that gives you universal routing, controllers, a
 If you miss the days of Rails forms and controllers, you'll love Republic.
 
 - **[Beginners Guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)** - for those who haven't used Republic before
-- **[Quick Start](#quick-install)** - for those in a rush
+- **[Concepts](#concepts)** - the reasons why you should use Republic
 - **[Documentation](#documentation)** - for a reference of all the parts to Republic
   - [Installation](#installation)
 
@@ -27,6 +27,8 @@ Republic provides routing functionality like Rails. You can build a URL or `<a h
 You define your routes in your Republic application. Your Republic application is universal, that is, it can be used both on the server and on the client side.
 
 ``` js
+import Republic, { route } from 'republic/next'
+
 export default new Republic(
   route.page('/blog', 'blog#index'),
   route.page('/blog/:slug', 'blog#show')
@@ -40,6 +42,8 @@ You can use express style routing, so for example parameters can be passed speci
 You can construct URLs given an action like `'blog#index'`, and optionally params like `{ slug: 'awesome-post' }`.
 
 ``` js
+import app from '../../app'
+
 app.url('blog#index') // => '/blog'
 app.url('blog#show', { slug: 'awesome-post' }) // => '/blog/awesome-post'
 ```
@@ -47,17 +51,23 @@ app.url('blog#show', { slug: 'awesome-post' }) // => '/blog/awesome-post'
 Because your Republic application is universal, you can build URLs both on the server and a client.
 
 #### Building `<a href>`
+
+You can build links much like Next.js, but you do not need to hardcode URLs, instead you can specify an action and optionally params.
   
 ``` jsx
-<Link action='blog#index'>
-  <a>View posts</a>
-</Link>
-```
+import React from 'react'
+import { Link } from 'republic/react'
 
-``` jsx
-<Link action='blog#show' params={{ slug: 'awesome-post' }}>
-  <a>Read awesome post</a>
-</Link>
+export default () =>
+  <div>
+    <Link action='blog#index'>
+      <a>View posts</a>
+    </Link>
+
+    <Link action='blog#show' params={{ slug: 'awesome-post' }}>
+      <a>Read awesome post</a>
+    </Link>
+  </div>
 ```
 
 ### Universal controllers
