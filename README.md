@@ -109,16 +109,19 @@ export default app.page(({ post }) =>
   </article>
 ```
 
+### Universal Forms
+
+Republic provides universal forms
 
 ## Documentation
 
-- **[Installation](#installation)**
-- **[new Republic](#new-republic)**
-- **[app.page](#app.page)**
-- **[app.url](#app.url)**
-- **[&lt;Link&gt;](#link)**
-- **[&lt;Form&gt;](#form)**
-- **[&lt;Input&gt;](#input)**
+- **[Installation](#installation)** - how to install Republic
+- **[new Republic](#new-republic)** - how to define your Republic application
+- **[`app.page()`](#apppage)** - how to define a Republic page
+- **[`app.url()`](#appurl)** - how to build a URL
+- **[`<Link>`](#link)** - how to link to other pages
+- **[`<Form>`](#form)** - how to create a universal form
+- **[`<Input>`](#input)** - how to add fields to your universal form
 
 ### Installation
 
