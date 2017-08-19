@@ -27,7 +27,7 @@ describe('nextHandler', () => {
       req,
       res,
       '/blog/index',
-      { params: { exampleQuery: true, exampleParam: 'cool' }, action: 'blog#index' }
+      { exampleQuery: true, exampleParam: 'cool', action: 'blog#index' }
     )
   })
 

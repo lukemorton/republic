@@ -35,7 +35,7 @@ describe('wrapPage()', () => {
   describe('when providing props to component', () => {
     const req = { mock: true }
     const params = { id: '1' }
-    const query = { action: 'blog#index', params }
+    const query = { action: 'blog#index', ...params }
     const route = { action: 'blog#index', module: 'blog', handler: jest.fn() }
     const app = new Republic(route)
     const Page = wrapPage(app, () => null)

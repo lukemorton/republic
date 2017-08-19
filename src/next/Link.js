@@ -1,24 +1,17 @@
 import React from 'react'
 import NextLink from 'next/link'
-import PropTypes from 'prop-types'
-
-function hrefFor (action, params) {
-  return {
-    pathname: `/${action.replace('#', '/')}`,
-    query: { action, params }
-  }
-}
+import href from './href'
 
 const Link = (props, context) => {
-  const app = context.app || props.app
-  const { action, params, ...nextLinkProps } = props
-  const href = hrefFor(action, params)
-  const as = app.url(action, params)
-  return <NextLink href={href} as={as} {...nextLinkProps} />
-}
+  const { action, params, url, ...nextLinkProps } = props
 
-Link.contextTypes = {
-  app: PropTypes.object
+  return (
+    <NextLink
+      href={href(action, params)}
+      as={url}
+      {...nextLinkProps}
+      />
+  )
 }
 
 export default Link

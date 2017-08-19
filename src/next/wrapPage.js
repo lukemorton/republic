@@ -7,8 +7,8 @@ export default function wrapPage (app, Component) {
 
     static async getInitialProps (ctx) {
       const { query } = ctx
-      const { params } = query
-      const route = app.route(query.action)
+      const { action, ...params } = query
+      const route = app.route(action)
 
       if (!route || !route.handler) {
         throw 'Page did not match route'
@@ -17,9 +17,9 @@ export default function wrapPage (app, Component) {
       const props = await route.handler({ ...ctx, route, params })
 
       if (props) {
-        return { ...props, action: query.action }
+        return { ...props, action }
       } else {
-        return { action: query.action }
+        return { action }
       }
     }
 
