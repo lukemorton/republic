@@ -113,6 +113,12 @@ export default app.page(({ post }) =>
 ## Documentation
 
 - **[Installation](#installation)**
+- **[new Republic](#new-republic)**
+- **[app.page](#app.page)**
+- **[app.url](#app.url)**
+- **[&lt;Link&gt;](#link)**
+- **[&lt;Form&gt;](#form)**
+- **[&lt;Input&gt;](#input)**
 
 ### Installation
 
@@ -149,7 +155,9 @@ Make sure the path to your app file is correct.
 
 ### new Republic
 
-### wrapPage
+### app.page
+
+### app.url
 
 ### &lt;Link&gt;
 
