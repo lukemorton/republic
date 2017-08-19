@@ -10,7 +10,6 @@ If you miss the days of Rails forms and controllers, you'll love Republic.
 - **[Beginners Guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)** - for those who haven't used Republic before
 - **[Concepts](#concepts)** - the reasons why you should use Republic
 - **[Documentation](#documentation)** - for a reference of all the parts to Republic
-  - [Installation](#installation)
 
 ## Beginners Guide
 
@@ -18,11 +17,11 @@ We have a lovely document for creating an application from scratch using Express
 
 ## Concepts
 
-### Universal routing
+### Universal Routing
 
 Republic provides routing functionality like Rails. You can build a URL or `<a href>` just by referencing the controller and action, perhaps providing some parameters.
 
-#### Defining routes
+#### Defining Routes
 
 You define your routes in your Republic application. Your Republic application is universal, that is, it can be used both on the server and on the client side.
 
@@ -70,48 +69,50 @@ export default () =>
   </div>
 ```
 
-### Universal controllers
+### Universal Controllers
 
-If you are familiar with Republic or you're just feeling brave you can use this quick start instead of the [getting started guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md). It's particularly ideal if you need a check list for adding Republic to your new application.
+Republic provides the ability to define controller action handlers for your routes. These are similar to Express route handlers, however they are universal, they can run both on the server and client. This makes it really easy to handle form submissions in the client if JavaScript is available, or submit to the server if not.
 
+#### Defining an Action Handler
 
-
-### Defining your routes
-
-Create an `app.js` file in the root of your application, or any where else, just remember to adjust the path when copying examples.
+You define your action handlers beside your routes, much like Express.
 
 ``` js
 import Republic, { route } from 'republic/next'
+import blog from './src/blog/'
 
 export default new Republic(
-  route.page('/blog', 'blog#index')
+  route.page('/blog', 'blog#index', () => {
+    return { posts: blog.FetchLatestBlogPosts() }
+  }),
+  
+  route.page('/blog/:slug', 'blog#show', ({ params }) => {
+    return { post: blog.FetchPost(params.slug) }
+  })
 )
 ```
 
-### Defining your pages
+As you can see, you return an object with data in it. This data will be accessible within your React page by passing the object into your page component's props.
 
-Create a Next.js page in a directory that matches the action. For example with an action of 'blog#index' you should place your page in `pages/blog/index.js`.
+#### Accessing Action Handler Data
 
-You need to make sure you wrap your page with `app.page()`.
+To illustrate, the access of the data returns from the action handler above, here is the page for `'blog#show'`. You can see we are accessing the post data returned from the action handler.
 
 ``` js
 import React from 'react'
 import app from '../../app'
 
-export default app.page(() =>
-  <div>
-    <h1>Hello world</h1>
-  </div>
-)
+export default app.page(({ post }) =>
+  <article>
+    <h1>{post.title}</h1>
+    {post.content}
+  </article>
 ```
 
-That's your page setup.
-
-
-
-Now you should be able to run the app and visit `/blog` or whatever your URL was.
 
 ## Documentation
+
+- **[Installation](#installation)**
 
 ### Installation
 
