@@ -21,6 +21,16 @@ describe('Republic (Next)', () => {
   })
 
   describe('when fetching routes', () => {
+    test('method and path are set on handler', () => {
+      const handler = jest.fn()
+      handler.method = 'POST'
+      handler.path = '/path'
+      const app = new Republic({ handler })
+      const [route] = app.routes()
+      expect(route.handler.method).toBe(handler.method)
+      expect(route.handler.path).toBe(handler.path)
+    })
+
     test('it injects redirectTo', () => {
       const handler = jest.fn()
       const app = new Republic({ handler })
