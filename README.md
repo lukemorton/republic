@@ -222,9 +222,9 @@ Make sure the path to your app file is correct.
 
 - [x] Update route builders to accept middleware as arguments, array as single argument, or mix of both like Express
 - [x] Pass rails-like params into handlers
+- [x] Universal redirect
 - [ ] Convention for express + next (helper wrappers)
 - [ ] Form error handling
-- [ ] Universal redirect
 - [ ] Abstract pages away from Next.js
 - [ ] Allow Form to have custom onSubmit
 - [ ] Provide all common form inputs
