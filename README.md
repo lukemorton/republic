@@ -3,25 +3,68 @@
 ![Plato](https://upload.wikimedia.org/wikipedia/commons/4/4a/Plato-raphael.jpg)  
 [![npm version](https://badge.fury.io/js/republic.svg)](https://badge.fury.io/js/republic)
 
-Republic is a library for React that gives you universal routing, forms, and actions. It currently is built to work with Express + Next.js but has been built in mind that this may not always be the stack of choice.
+Republic is a library for React that gives you universal routing, controllers, and forms. It currently is built to work with Express + Next.js but has been built in mind that this may not always be the stack of choice.
 
 If you miss the days of Rails forms and controllers, you'll love Republic.
 
-- **[Getting started](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)** - for those who haven't used Republic before
-- **[Quick start](#quick-install)** - for those in a rush
+- **[Beginners Guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)** - for those who haven't used Republic before
+- **[Quick Start](#quick-install)** - for those in a rush
 - **[Documentation](#documentation)** - for a reference of all the parts to Republic
+  - [Installation](#installation)
 
-## Getting started
+## Beginners Guide
 
 We have a lovely document for creating an application from scratch using Express + Next.js + Republic. The guide is a complete walkthrough that's ideal for first time users. [Read it to get started.](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)
 
-## Quick install
+## Concepts
+
+### Universal routing
+
+Republic provides routing functionality like Rails. You can build a URL or `<a href>` just by referencing the controller and action, perhaps providing some parameters.
+
+#### Defining routes
+
+You define your routes in your Republic application. Your Republic application is universal, that is, it can be used both on the server and on the client side.
+
+``` js
+export default new Republic(
+  route.page('/blog', 'blog#index'),
+  route.page('/blog/:slug', 'blog#show')
+)
+```
+
+You can use express style routing, so for example parameters can be passed specified like `:slug`.
+
+#### Building URLs
+
+You can construct URLs given an action like `'blog#index'`, and optionally params like `{ slug: 'awesome-post' }`.
+
+``` js
+app.url('blog#index') // => '/blog'
+app.url('blog#show', { slug: 'awesome-post' }) // => '/blog/awesome-post'
+```
+
+Because your Republic application is universal, you can build URLs both on the server and a client.
+
+#### Building `<a href>`
+  
+``` jsx
+<Link action='blog#index'>
+  <a>View posts</a>
+</Link>
+```
+
+``` jsx
+<Link action='blog#show' params={{ slug: 'awesome-post' }}>
+  <a>Read awesome post</a>
+</Link>
+```
+
+### Universal controllers
 
 If you are familiar with Republic or you're just feeling brave you can use this quick start instead of the [getting started guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md). It's particularly ideal if you need a check list for adding Republic to your new application.
 
-### Set up Express + Next.js
 
-Use Next.js's [example of custom server using Express](https://github.com/zeit/next.js/tree/master/examples/custom-server-express) to setup your app ready to install Republic.
 
 ### Defining your routes
 
@@ -54,7 +97,19 @@ export default app.page(() =>
 
 That's your page setup.
 
-### Setting up republic
+
+
+Now you should be able to run the app and visit `/blog` or whatever your URL was.
+
+## Documentation
+
+### Installation
+
+#### Install Express + Next.js
+
+Use Next.js's [example of custom server using Express](https://github.com/zeit/next.js/tree/master/examples/custom-server-express) to setup your app ready to install Republic.
+
+#### Install Republic
 
 Install republic first with:
 
@@ -80,12 +135,6 @@ server.use(asExpressMiddleware(app, nextHandler(nextApp)))
 ```
 
 Make sure the path to your app file is correct.
-
-Now you should be able to run the app and visit `/blog` or whatever your URL was.
-
-## Documentation
-
-To be completed...
 
 ### new Republic
 
