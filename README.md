@@ -1,6 +1,7 @@
 # Republic
 
-![Plato](https://upload.wikimedia.org/wikipedia/commons/4/4a/Plato-raphael.jpg)  
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Plato-raphael.jpg" width="150" />
+
 [![npm version](https://badge.fury.io/js/republic.svg)](https://badge.fury.io/js/republic)
 
 Republic is a library for React that gives you universal routing, controllers, and forms. It currently is built to work with Express + Next.js but has been built in mind that this may not always be the stack of choice.
