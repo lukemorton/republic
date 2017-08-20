@@ -160,14 +160,14 @@ Because `'blog#index'` is in the same controller as `'blog#subscribe'` the subsc
 ## Documentation
 
 - **[Installation](#installation)** - how to install Republic
-- **[`new Republic(...routes)`](#new-republic)** - how to define your Republic application
-- **[`app.page(Component)`](#apppage)** - how to define a Republic page
-- **[`app.url(action, params = {})`](#appurl)** - how to build a URL
+- **[`new Republic(...routes)`](#new-republicroutes)** - how to define your Republic application
+- **[`app.page(Component)`](#apppagecomponent)** - how to define a Republic page
+- **[`app.url(action, params = {})`](#appurlaction-params--)** - how to build a URL
 - **[`<Link>`](#link)** - how to link to other pages
 - **[`<Form>`](#form)** - how to create a universal form
-- **[`<Input />`](#input)** - how to add fields to your universal form
-- **[`<Textarea />`](#textarea)** - how to add textarea fields to your universal form
-- **[`<Select />`](#select)** - how to add select fields to your universal form
+- **[`<Input />`](#input-)** - how to add fields to your universal form
+- **[`<Textarea />`](#textarea-)** - how to add textarea fields to your universal form
+- **[`<Select>`](#select)** - how to add select fields to your universal form
 
 ### Installation
 
