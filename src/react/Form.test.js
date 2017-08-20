@@ -53,6 +53,49 @@ describe('Form', () => {
       form.instance().handleChange('user[name]', 'Luke')
       expect(form.instance().values()).toEqual({ user: { name: 'Luke' } })
     })
+
+    describe('and the type is radio', () => {
+      test('the form records values', () => {
+        const form = shallow(<Form action={mockAction()} />)
+        form.instance().handleChange('user[remember]', 'yes')
+        expect(form.instance().values()).toEqual({ user: { remember: 'yes' } })
+      })
+    })
+
+    describe('and the type is single value checkbox', () => {
+      test('the form records values', () => {
+        const form = shallow(<Form action={mockAction()} />)
+        form.instance().handleChange('user[remember]', 'yes', { checked: true, type: 'checkbox' })
+        expect(form.instance().values()).toEqual({ user: { remember: 'yes' } })
+      })
+
+      test('the form removes unchecked values', () => {
+        const form = shallow(<Form action={mockAction()} />)
+        form.instance().handleChange('user[remember]', 'yes', { checked: true, type: 'checkbox' })
+        expect(form.instance().values()).toEqual({ user: { remember: 'yes' } })
+        form.instance().handleChange('user[remember]', 'yes', { checked: false, type: 'checkbox' })
+        expect(form.instance().values()).toEqual({ user: { remember: '' } })
+      })
+    })
+
+    describe('and the type is multi value checkbox', () => {
+      test('the form records values when checked', () => {
+        const form = shallow(<Form action={mockAction()} />)
+        form.instance().handleChange('user[colors][]', 'green', { checked: true, type: 'checkbox' })
+        expect(form.instance().values()).toEqual({ user: { colors: ['green'] } })
+        form.instance().handleChange('user[colors][]', 'blue', { checked: true, type: 'checkbox' })
+        expect(form.instance().values()).toEqual({ user: { colors: ['green', 'blue'] } })
+      })
+
+      test('the form removes values when unchecked', () => {
+        const form = shallow(<Form action={mockAction()} />)
+        form.instance().handleChange('user[colors][]', 'green', { checked: true, type: 'checkbox' })
+        form.instance().handleChange('user[colors][]', 'blue', { checked: true, type: 'checkbox' })
+        expect(form.instance().values()).toEqual({ user: { colors: ['green', 'blue'] } })
+        form.instance().handleChange('user[colors][]', 'green', { checked: false, type: 'checkbox' })
+        expect(form.instance().values()).toEqual({ user: { colors: ['blue'] } })
+      })
+    })
   })
 
   describe('when retrieving single value', () => {

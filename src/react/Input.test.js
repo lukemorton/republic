@@ -36,12 +36,15 @@ describe('Input', () => {
   })
 
   describe('when provided custom onChange handler via context', () => {
-    test('it passes name and value only', () => {
+    test('it passes type, name and value only', () => {
       const onChange = jest.fn()
       const input = shallow(<Input name='email' />, { context: { onChange } })
       const event = { target: { value: 'new@example.com' } }
       input.simulate('change', event)
-      expect(onChange).toBeCalledWith('email', 'new@example.com')
+      expect(onChange).toBeCalledWith('email', 'new@example.com', {
+        type: undefined,
+        checked: undefined
+      })
     })
   })
 
@@ -63,6 +66,25 @@ describe('Input', () => {
       const value = () => undefined
       const input = shallow(<Input name='testing' />, { context: { value } })
       expect(input.find('input')).toHaveProp('value', '')
+    })
+  })
+
+  describe('when building radio input', () => {
+    test('it is checked when value the same', () => {
+      const value = () => 'yay'
+      const input = shallow(<Input type='radio' name='testing' value='yay' />, { context: { value } })
+      expect(input.find('input')).toHaveProp('checked', true)
+    })
+
+    test('it is checked when value not the same', () => {
+      const value = () => 'nay'
+      const input = shallow(<Input type='radio' name='testing' value='yay' />, { context: { value } })
+      expect(input.find('input')).toHaveProp('checked', false)
+    })
+
+    test('checked is undefined when context.value not provided', () => {
+      const input = shallow(<Input type='radio' name='testing' value='yay' />)
+      expect(input.find('input')).toHaveProp('checked', undefined)
     })
   })
 })
