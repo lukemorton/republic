@@ -4,7 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/republic.svg)](https://badge.fury.io/js/republic)
 
-Republic is a library for React that gives you universal routing, controllers, and forms. It currently is built to work with Express + Next.js but has been built in mind that this may not always be the stack of choice.
+Republic is a library for React that gives you productive routing, controllers, and forms. It currently is built to work with Express + Next.js but has been built in mind that this may not always be the stack of choice.
 
 If you miss the days of Rails forms and controllers, you'll love Republic.
 
@@ -18,7 +18,15 @@ We have a lovely document for creating an application from scratch using Express
 
 ## Concepts
 
-### Universal Routing
+There are three concepts that make Republic compelling to use.
+
+- Routing
+- Controllers
+- Forms
+
+Republic tries to fuse the productivity provided by web frameworks like Rails with the new world of React. Unfortunately React requires quite a lot of boilerplate when making forms, Redux isn't straight forward when dealing with data, and Next.js does not have any inbuilt routing. Republic aims to solve all of these problems.
+
+### Routing
 
 Republic provides routing functionality like Rails. You can build a URL or `<a href>` just by referencing the controller and action, perhaps providing some parameters.
 
@@ -70,7 +78,7 @@ export default () =>
   </div>
 ```
 
-### Universal Controllers
+### Controllers
 
 Republic provides the ability to define controller action handlers for your routes. These are similar to Express route handlers, however they are universal, they can run both on the server and client. This makes it really easy to handle form submissions in the client if JavaScript is available, or submit to the server if not.
 
@@ -99,7 +107,7 @@ As you can see, you return an object with data in it. This data will be accessib
 
 To illustrate, the access of the data returns from the action handler above, here is the page for `'blog#show'`. You can see we are accessing the post data returned from the action handler.
 
-``` js
+``` jsx
 import React from 'react'
 import app from '../../app'
 
@@ -108,9 +116,10 @@ export default app.page(({ post }) =>
     <h1>{post.title}</h1>
     {post.content}
   </article>
+)
 ```
 
-### Universal Forms
+### Forms
 
 Republic provides universal forms that handle state management for you. No longer do you need to define your own onChange handlers, a huge bug bear for those coming from Rails. Also, because Republic provides universal forms, the form can be handled both server side if JavaScript is not available, or in the client if it is.
 
