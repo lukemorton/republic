@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Republic from '../../src/republic'
-import { Form, Input } from '../../src/react/'
+import { Form, Input, Select } from '../../src/react/'
 
 describe('Application with forms', () => {
   describe('when form has input', () => {
@@ -15,16 +15,26 @@ describe('Application with forms', () => {
           <p>
             <Input name='user[email]' />
           </p>
+
           <p>
             <Input type='checkbox' name='user[remember]' value='yes' />
           </p>
+
           <p>
             <Input type='checkbox' name='user[colors][]' value='blue' />
             <Input type='checkbox' name='user[colors][]' value='red' />
           </p>
+
           <p>
             <Input type='radio' name='user[cool]' value='yes' />
             <Input type='radio' name='user[cool]' value='no' />
+          </p>
+
+          <p>
+            <Select name='country'>
+              <option value='UK'>UK</option>
+              <option value='Japan'>Japan</option>
+            </Select>
           </p>
         </Form>
       )
