@@ -53,7 +53,7 @@ Because your Republic application is universal, you can build URLs both on the s
 #### Building `<a href>`
 
 You can build links much like Next.js, but you do not need to hardcode URLs, instead you can specify an action and optionally params.
-  
+
 ``` jsx
 import React from 'react'
 import { Link } from 'republic/react'
@@ -86,7 +86,7 @@ export default new Republic(
   route.page('/blog', 'blog#index', () => {
     return { posts: blog.FetchLatestBlogPosts() }
   }),
-  
+
   route.page('/blog/:slug', 'blog#show', ({ params }) => {
     return { post: blog.FetchPost(params.slug) }
   })
@@ -126,7 +126,7 @@ export default new Republic(
   route.page('/blog', 'blog#index', () => {
     return { posts: blog.FetchLatestBlogPosts() }
   }),
-  
+
   route.POST('/blog/subscribe', 'blog#subscribe', async ({ params, redirectTo }) => {
     await blog.Subscribe(params.email)
     redirectTo('blog#index')
@@ -149,6 +149,7 @@ import PostList from '../../components/PostList'
 export default app.page(({ posts, subscribe }) =>
   <Form action={subscribe}>
     <Input type='email' name='subscription[email]' />
+    <Input type='checkbox' name='subscription[include_spam]' value='yes' />
     <button>Subscribe</button>
   </Form>
 )
@@ -159,12 +160,14 @@ Because `'blog#index'` is in the same controller as `'blog#subscribe'` the subsc
 ## Documentation
 
 - **[Installation](#installation)** - how to install Republic
-- **[`new Republic`](#new-republic)** - how to define your Republic application
-- **[`app.page()`](#apppage)** - how to define a Republic page
-- **[`app.url()`](#appurl)** - how to build a URL
+- **[`new Republic(...routes)`](#new-republic)** - how to define your Republic application
+- **[`app.page(Component)`](#apppage)** - how to define a Republic page
+- **[`app.url(action, params = {})`](#appurl)** - how to build a URL
 - **[`<Link>`](#link)** - how to link to other pages
 - **[`<Form>`](#form)** - how to create a universal form
-- **[`<Input>`](#input)** - how to add fields to your universal form
+- **[`<Input />`](#input)** - how to add fields to your universal form
+- **[`<Textarea />`](#textarea)** - how to add textarea fields to your universal form
+- **[`<Select />`](#select)** - how to add select fields to your universal form
 
 ### Installation
 
@@ -199,17 +202,25 @@ server.use(asExpressMiddleware(app, nextHandler(nextApp)))
 
 Make sure the path to your app file is correct.
 
-### new Republic
+### `new Republic(...routes)`
 
-### app.page
+### `app.page(Component)`
 
-### app.url
+### `app.url(action, params = {})`
 
-### &lt;Link&gt;
+### `<Link>`
 
-### &lt;Form&gt;
+### `<Form>`
 
-### &lt;Input&gt;
+### `<Input />`
+
+#### `<Input type='radio' />`
+
+#### `<Input type='checkbox' />`
+
+### `<Textarea />`
+
+### `<Select>`
 
 ## Roadmap
 
