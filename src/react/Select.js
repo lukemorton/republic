@@ -20,9 +20,24 @@ function buildOnChange (props, context) {
   else if (!context.onChange) return () => null
 
   return function ({ target }) {
-    context.onChange(props.name, target.value, {
-      multi: props.multi
+    context.onChange(props.name, valuesFromTarget(props, target), {
+      multiple: props.multiple
     })
+  }
+}
+
+function valuesFromTarget (props, target) {
+  if (props.multiple) {
+    const values = []
+
+
+    for (const option of target.selectedOptions) {
+      values.push(option.value)
+    }
+
+    return values
+  } else {
+    return target.value
   }
 }
 
@@ -30,7 +45,15 @@ function buildValue (props, context) {
   if (props.value) {
     return props.value
   } else if (context.value) {
-    return context.value(props.name) || ''
+    const value = context.value(props.name)
+
+    if (value) {
+      return value
+    } else if (props.multiple) {
+      return []
+    } else {
+      return ''
+    }
   }
 }
 

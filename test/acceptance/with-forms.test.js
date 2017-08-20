@@ -31,9 +31,16 @@ describe('Application with forms', () => {
           </p>
 
           <p>
-            <Select name='country'>
+            <Select name='user[country]'>
               <option value='UK'>UK</option>
               <option value='Japan'>Japan</option>
+            </Select>
+          </p>
+
+          <p>
+            <Select name='user[food]' multiple>
+              <option value='Menemen'>Menemen</option>
+              <option value='Full English'>Full English</option>
             </Select>
           </p>
         </Form>
@@ -46,6 +53,8 @@ describe('Application with forms', () => {
       form.find({ name: 'user[remember]' }).simulate('change', { target: { value: 'yes', checked: true } })
       form.find({ name: 'user[colors][]', value: 'blue' }).simulate('change', { target: { value: 'blue', checked: true } })
       form.find({ name: 'user[cool]', value: 'yes' }).simulate('change', { target: { value: 'yes', checked: true } })
+      form.find({ name: 'user[country]' }).simulate('change', { target: { value: 'UK' } })
+      form.find({ name: 'user[food]' }).simulate('change', { target: { selectedOptions: [{ value: 'Menemen'}] } })
 
       expect(form.instance().values()).toEqual({
         user: {
@@ -53,18 +62,24 @@ describe('Application with forms', () => {
           remember: 'yes',
           colors: ['blue'],
           cool: 'yes',
+          country: 'UK',
+          food: ['Menemen']
         }
       })
 
       form.find({ name: 'user[colors][]', value: 'blue' }).simulate('change', { target: { value: 'blue', checked: false } })
       form.find({ name: 'user[cool]', value: 'no' }).simulate('change', { target: { value: 'no', checked: true } })
+      form.find({ name: 'user[country]' }).simulate('change', { target: { value: 'Japan' } })
+      form.find({ name: 'user[food]' }).simulate('change', { target: { selectedOptions: [{ value: 'Menemen'}, { value: 'Full English' }] } })
 
       expect(form.instance().values()).toEqual({
         user: {
           email: 'new@email.com',
           remember: 'yes',
           colors: [],
-          cool: 'no'
+          cool: 'no',
+          country: 'Japan',
+          food: ['Menemen', 'Full English']
         }
       })
     })

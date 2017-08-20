@@ -42,10 +42,24 @@ describe('Select', () => {
     })
   })
 
-  test('it can get value from context', () => {
-    const value = jest.fn(() => 'yes')
-    const select = createSelectWithContext({ value })
-    expect(select).toHaveProp('value', 'yes')
+  describe('when provided value getter via context', () => {
+    test('it can get value from context', () => {
+      const value = jest.fn(() => 'yes')
+      const select = createSelectWithContext({ value })
+      expect(select).toHaveProp('value', 'yes')
+    })
+
+    test('it defaults to empty string if getter returns undefined from context', () => {
+      const value = jest.fn(() => undefined)
+      const select = createSelectWithContext({ value })
+      expect(select).toHaveProp('value', '')
+    })
+
+    test('it defaults to empty array if getter returns undefined and select is multiple from context', () => {
+      const value = jest.fn(() => undefined)
+      const select = createSelect({ multiple: true }, { value })
+      expect(select).toHaveProp('value', [])
+    })
   })
 
   describe('when provided custom onChange handler via props', () => {
@@ -64,15 +78,15 @@ describe('Select', () => {
       const select = createSelect({ name: 'country' }, { onChange })
       const event = { target: { value: 'UK' } }
       select.simulate('change', event)
-      expect(onChange).toBeCalledWith('country', 'UK', { multi: undefined })
+      expect(onChange).toBeCalledWith('country', 'UK', { multiple: undefined })
     })
 
-    test('it passes multi if provided', () => {
+    test('it passes multiple if provided', () => {
       const onChange = jest.fn()
-      const select = createSelect({ name: 'country', multi: true }, { onChange })
-      const event = { target: { value: 'UK' } }
+      const select = createSelect({ name: 'country', multiple: true }, { onChange })
+      const event = { target: { selectedOptions: [{ value: 'UK' }] } }
       select.simulate('change', event)
-      expect(onChange).toBeCalledWith('country', 'UK', { multi: true })
+      expect(onChange).toBeCalledWith('country', ['UK'], { multiple: true })
     })
   })
 })

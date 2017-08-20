@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input } from 'republic/react'
+import { Form, Input, Select } from 'republic/react'
 
 export default ({ subscribe }) =>
   <Form action={subscribe}>
@@ -39,6 +39,13 @@ export default ({ subscribe }) =>
         <Input type='radio' name='subscription[cool]' value='no' />
         not cool
       </label>
+    </p>
+
+    <p>
+      <Select name='subscription[food]' multiple>
+        <option value='Menemen'>Menemen</option>
+        <option value='Full English'>Full English</option>
+      </Select>
     </p>
 
     <p>
