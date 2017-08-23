@@ -4,6 +4,8 @@ This is a guide for learning how Express + Next.js + Republic can be wired up to
 
 **If at any point you get stuck, please just [open an issue](https://github.com/lukemorton/republic/issues) on GitHub.**
 
+## Create your project
+
 You can generate a new project Next.js with one command. Make sure you have the latest version of [NPM installed](https://docs.npmjs.com/getting-started/installing-node#updating-npm).
 
 ```
@@ -21,6 +23,8 @@ This step is fairly easy.
 npm install --save republic babel-cli
 ```
 
+We install Republic for obvious reasons (it's great and this is a getting started guide for Republic). We also install Babel CLI so we can have modern JavaScript syntax.
+
 ## Defining your application
 
 Republic has the idea of an application object. This object represents the routes of your application amongst other things. The routes describe what URLs match with your Next.js pages.
@@ -35,9 +39,9 @@ export default new Republic(
 )
 ```
 
-The route above links `/` URL to the page contained within `pages/blog/index.js`.
+The route defined above tells Republic that the `/` URL should be routed to the page contained within `pages/blog/index.js`.
 
-It's worth noting that this file will be run in both the node.js server environment and on the client side (in the web browser). Any imports must work in both environments.
+It's worth noting that `app.js` file will be run in both the node.js server environment and on the client side (in the web browser). Any imported libraries must work in both environments.
 
 ## Hooking up Republic with Express + Next.js
 
