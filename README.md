@@ -8,7 +8,7 @@ Republic is a library for React that gives you productive routing, controllers, 
 
 If you miss the days of Rails forms and controllers, you'll love Republic.
 
-- **[Beginners Guide](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)** - for those who haven't used Republic before
+- **[Start Here](https://github.com/lukemorton/republic/blob/master/GETTING_STARTED.md)** - for those who haven't used Republic before
 - **[Concepts](#concepts)** - the reasons why you should use Republic
 - **[Documentation](#documentation)** - for a reference of all the parts to Republic
 
