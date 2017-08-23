@@ -244,9 +244,9 @@ Make sure the path to your app file is correct.
 - [x] Update route builders to accept middleware as arguments, array as single argument, or mix of both like Express
 - [x] Pass rails-like params into handlers
 - [x] Universal redirect
+- [x] Provide all common form inputs
 - [ ] Convention for express + next (helper wrappers)
 - [ ] Form error handling
 - [ ] Abstract pages away from Next.js
 - [ ] Allow Form to have custom onSubmit
-- [ ] Provide all common form inputs
 - [ ] Upcoming middleware: how to, make sure API is easy to understand, etc.
