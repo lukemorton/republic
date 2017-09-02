@@ -20,10 +20,10 @@ This will generate a new directory called `my-new-app/` with a Next.js applicati
 This step is fairly easy.
 
 ```
-npm install --save republic babel-cli
+npm install --save republic babel-cli express
 ```
 
-We install Republic for obvious reasons (it's great and this is a getting started guide for Republic). We also install Babel CLI so we can have modern JavaScript syntax.
+We install Republic for obvious reasons (it's great and this is a getting started guide for Republic). We also install Babel CLI so we can have modern JavaScript syntax. Lastly we install Express.
 
 ## Defining your application
 
