@@ -11,10 +11,10 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "next": "^2.4.9",
+    "next": "^3.2.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "republic": "^0.2.16"
+    "republic": "^0.3.2"
   },
   "babel": {
     "presets": [
