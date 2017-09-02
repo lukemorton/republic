@@ -1,6 +1,6 @@
 {
   "name": "republic",
-  "version": "0.2.16",
+  "version": "0.3.1",
   "description": "Routing, forms, and actions for your React.",
   "main": "./republic.js",
   "scripts": {
@@ -36,7 +36,7 @@
     "express": "^4.15.3",
     "jest": "^20.0.4",
     "jest-enzyme": "^3.6.1",
-    "next": "^2.4.9",
+    "next": "^3.2.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
