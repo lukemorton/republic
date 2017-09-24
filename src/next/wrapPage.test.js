@@ -48,10 +48,36 @@ describe('wrapPage()', () => {
       )
     })
 
-    test('it provides handlers results as props', async () => {
-      route.handler.mockReturnValueOnce({ nice: true })
+    describe('and handler returns values', () => {
+      beforeEach(() => {
+        route.handler.mockReturnValueOnce({ nice: true })
+      })
+
+      test('it provides handlers results in props', async () => {
+        const props = await Page.getInitialProps({ query })
+        expect(props).toMatchObject({ nice: true })
+      })
+
+      test('it provides params in props', async () => {
+        const props = await Page.getInitialProps({ query })
+        expect(props).toMatchObject({ params })
+      })
+    })
+
+    describe('and handler returns null', () => {
+      beforeEach(() => {
+        route.handler.mockReturnValueOnce(null)
+      })
+
+      test('it provides params in props', async () => {
+        const props = await Page.getInitialProps({ query })
+        expect(props).toMatchObject({ params })
+      })
+    })
+
+    test('it provides params in props', async () => {
       const props = await Page.getInitialProps({ query })
-      expect(props).toMatchObject({ nice: true })
+      expect(props).toMatchObject({ params })
     })
 
     test('it provides actions as props', async () => {

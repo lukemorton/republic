@@ -17,9 +17,9 @@ export default function wrapPage (app, Component) {
       const props = await route.handler(params, { ...ctx, route })
 
       if (props) {
-        return { ...props, action }
+        return { action, params, ...props }
       } else {
-        return { action }
+        return { action, params }
       }
     }
 
