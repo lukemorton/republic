@@ -1,1 +1,1 @@
-module.exports = require('./lib/next/test')
+module.exports = require('./lib/next/testHelpers')
