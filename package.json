@@ -1,6 +1,6 @@
 {
   "name": "republic",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "Routing, forms, and actions for your React.",
   "main": "./republic.js",
   "scripts": {
