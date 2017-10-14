@@ -49,12 +49,16 @@ describe('Application with forms', () => {
 
     test('the form is aware of changes to input', () => {
       const form = createForm()
-      form.find({ name: 'user[email]' }).simulate('change', { target: { value: 'new@email.com' } })
-      form.find({ name: 'user[remember]' }).simulate('change', { target: { value: 'yes', checked: true } })
-      form.find({ name: 'user[colors][]', value: 'blue' }).simulate('change', { target: { value: 'blue', checked: true } })
-      form.find({ name: 'user[cool]', value: 'yes' }).simulate('change', { target: { value: 'yes', checked: true } })
-      form.find({ name: 'user[country]' }).simulate('change', { target: { value: 'UK' } })
-      form.find({ name: 'user[food]' }).simulate('change', { target: { selectedOptions: [{ value: 'Menemen'}] } })
+
+      const inputs = form.find('input')
+      inputs.find({ name: 'user[email]' }).simulate('change', { target: { value: 'new@email.com' } })
+      inputs.find({ name: 'user[remember]' }).simulate('change', { target: { value: 'yes', checked: true } })
+      inputs.find({ name: 'user[colors][]', value: 'blue' }).simulate('change', { target: { value: 'blue', checked: true } })
+      inputs.find({ name: 'user[cool]', value: 'yes' }).simulate('change', { target: { value: 'yes', checked: true } })
+
+      const selects = form.find('select')
+      selects.find({ name: 'user[country]' }).simulate('change', { target: { value: 'UK' } })
+      selects.find({ name: 'user[food]' }).simulate('change', { target: { selectedOptions: [{ value: 'Menemen'}] } })
 
       expect(form.instance().values()).toEqual({
         user: {
@@ -67,10 +71,10 @@ describe('Application with forms', () => {
         }
       })
 
-      form.find({ name: 'user[colors][]', value: 'blue' }).simulate('change', { target: { value: 'blue', checked: false } })
-      form.find({ name: 'user[cool]', value: 'no' }).simulate('change', { target: { value: 'no', checked: true } })
-      form.find({ name: 'user[country]' }).simulate('change', { target: { value: 'Japan' } })
-      form.find({ name: 'user[food]' }).simulate('change', { target: { selectedOptions: [{ value: 'Menemen'}, { value: 'Full English' }] } })
+      inputs.find({ name: 'user[colors][]', value: 'blue' }).simulate('change', { target: { value: 'blue', checked: false } })
+      inputs.find({ name: 'user[cool]', value: 'no' }).simulate('change', { target: { value: 'no', checked: true } })
+      selects.find({ name: 'user[country]' }).simulate('change', { target: { value: 'Japan' } })
+      selects.find({ name: 'user[food]' }).simulate('change', { target: { selectedOptions: [{ value: 'Menemen'}, { value: 'Full English' }] } })
 
       expect(form.instance().values()).toEqual({
         user: {
@@ -86,15 +90,15 @@ describe('Application with forms', () => {
 
     test('the form injects values into inputs', () => {
       const form = createForm()
-      const input = form.find({ name: 'user[email]' })
-      input.simulate('change', { target: { value: 'new@email.com' } })
-      expect(input.find('input').prop('value')).toBe('new@email.com')
+      const input = () => form.find('input').filter({ name: 'user[email]' })
+      input().simulate('change', { target: { value: 'new@email.com' } })
+      expect(input().prop('value')).toBe('new@email.com')
     })
 
     test('the form passes values to action', () => {
       const action = jest.fn()
       const form = createForm(action)
-      form.find({ name: 'user[email]' }).simulate('change', { target: { value: 'new@email.com' } })
+      form.find('input').find({ name: 'user[email]' }).simulate('change', { target: { value: 'new@email.com' } })
       form.simulate('submit', { preventDefault () {} })
       expect(action).toBeCalledWith({ user: { email: 'new@email.com' } })
     })

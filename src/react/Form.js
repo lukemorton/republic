@@ -13,7 +13,7 @@ export default class Form extends React.Component {
   }
 
   componentWillMount () {
-    this.state = { values: this.props.values || {} }
+    this.setState({ values: this.props.values || {} })
   }
 
   getChildContext () {
