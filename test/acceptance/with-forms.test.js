@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Republic from '../../src/republic'
-import { Form, Input, Select } from '../../src/react/'
+import Republic from '../../lib/republic'
+import { Form, Input, Select } from '../../lib/react/'
 
 describe('Application with forms', () => {
   describe('when form has input', () => {
