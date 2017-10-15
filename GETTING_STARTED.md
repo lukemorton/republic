@@ -6,9 +6,10 @@ This is a guide for learning how Express + Next.js + Republic can be wired up to
 
 ## Create your project
 
-You can generate a new project Next.js with one command. Make sure you have the latest version of [NPM installed](https://docs.npmjs.com/getting-started/installing-node#updating-npm).
+You can generate a new project Next.js with one command. Make sure you have the latest version of [NPM installed](https://docs.npmjs.com/getting-started/installing-node#updating-npm) as npx was introduced in `v5.2`.
 
 ```
+npm i -g npm
 npx create-next-app my-new-app
 cd my-new-app
 ```
