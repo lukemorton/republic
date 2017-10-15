@@ -4,11 +4,11 @@
   "description": "Routing, forms, and actions for your React.",
   "main": "./republic.js",
   "bin": {
-    "republic": "lib/bin/start.js"
+    "republic": "dist/lib/bin/start.js"
   },
   "scripts": {
-    "prepare": "babel src --out-dir lib --ignore *.test.js",
-    "watch": "babel src --out-dir lib --watch --ignore *.test.js",
+    "prepare": "babel lib --out-dir dist/lib --ignore *.test.js",
+    "watch": "babel lib --out-dir dist/lib --watch --ignore *.test.js",
     "test": "jest --notify"
   },
   "repository": {

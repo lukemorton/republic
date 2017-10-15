@@ -1,1 +1,1 @@
-module.exports = require('./lib/republic.js')
+module.exports = require('./dist/lib/republic.js')
