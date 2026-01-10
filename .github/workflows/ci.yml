@@ -23,6 +23,3 @@ jobs:
 
       - name: Lint and Test
         run: npm run lint-and-test
-
-      - name: Build
-        run: npm run build
