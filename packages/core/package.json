@@ -1,0 +1,46 @@
+{
+  "name": "@republic/core",
+  "version": "0.0.1",
+  "description": "Core utilities for Republic framework",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build && tsc --emitDeclarationOnly",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "republic",
+    "framework"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vite-plugin-dts": "^4.4.0",
+    "vitest": "^2.1.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
