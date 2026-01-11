@@ -2,9 +2,11 @@
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Plato-raphael.jpg" width="150" />
 
-Republic is a batteries-included web framework for **human-led, AI-assisted development**.
+Republic is a batteries-included web framework where **intent is the source of truth**.
 
-It is designed for a world where software is continuously generated, refactored, upgraded, and deployed with the help of AI — but where humans still define intent, behaviour, and architecture.
+It is designed for a world where software is continuously generated, refactored, upgraded, and deployed — where intent and specifications are the primary artefacts, and code is a compiled output.
+
+Intent may be authored by humans, AI agents, or automated systems. Republic does not privilege the source of intent. It governs the intent itself.
 
 Republic feels familiar, like Rails, but is built around a fundamentally different idea:
 
@@ -14,14 +16,28 @@ Republic feels familiar, like Rails, but is built around a fundamentally differe
 
 ## What Republic Is
 
-- A **framework** with strong, opinionated idioms
-- A **compiler** that deterministically enforces those idioms
-- A **CLI** that is the primary tool for both humans and AI agents
-- A **harness** that guarantees structure, style, and tests
-- A **multi-target system** that can emit code or deploy directly to cloud platforms
+- A **framework** that codifies intent, not code
+- A **compiler** that deterministically generates code, tests, and infrastructure from that intent
+- A **CLI** that provides the same structured interface to humans, AI agents, and automated systems
+- A **harness** that enforces idioms regardless of who authored the intent
+- A **multi-target system** that materialises applications for different runtimes and cloud platforms
+
+Code is a compiled artefact. It can be regenerated, replaced, or upgraded through recompilation — not manual refactoring.
 
 Republic is not a loose collection of generators.
 It is a governed system.
+
+---
+
+## Intent over Code
+
+Code is not the primary artefact in Republic.
+
+The Constitution and feature specifications are the authoritative representation of the system.
+
+Code exists to be generated, replaced, and regenerated.
+
+Manual code edits are permitted but never authoritative — unless explicitly wired into intent.
 
 ---
 
@@ -89,11 +105,11 @@ Every operation:
 Republic enforces a single, canonical way of structuring applications per target.
 
 Like Rails, it defines:
-- how controllers look
-- how models are structured
+- how controllers are structured
+- how models are shaped
 - how routing is expressed
 - how errors are handled
-- how tests are written
+- how tests are generated
 
 Unlike Rails:
 - these idioms are compiler-enforced
@@ -126,7 +142,7 @@ Republic treats tests as part of the application definition, not as an afterthou
 
 Republic is opinionated, not restrictive.
 
-Any generated component can be replaced with custom, user-authored code by explicitly wiring it into the Constitution.
+Any generated component can be replaced with custom code by explicitly wiring it into the Constitution.
 
 The framework:
 - validates the override
@@ -165,10 +181,12 @@ Republic is designed for long-lived software.
 
 ## Philosophy
 
-Republic treats software as something to be governed, not handcrafted.
+Republic treats software as something to be governed, not written.
 
-Humans define intent and policy.
-Tools and AI execute deterministically.
+Intent is defined — by humans, AI agents, or automated systems.
+Code is compiled from that intent.
 The Constitution keeps everything coherent over time.
 
-From idea → intent → compilation → deployment.
+Republic does not privilege the origin of intent. It governs the intent itself.
+
+From intent → compilation → deployment.
