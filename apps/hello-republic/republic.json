@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0",
+  "name": "hello-republic",
+  "resources": [
+    {
+      "name": "Post",
+      "fields": [
+        { "name": "id", "type": "string", "required": true },
+        { "name": "title", "type": "string", "required": true },
+        { "name": "body", "type": "string", "required": true },
+        { "name": "createdAt", "type": "date", "required": true }
+      ],
+      "operations": ["list", "get", "create"]
+    }
+  ]
+}
