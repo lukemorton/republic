@@ -1,5 +1,7 @@
 # 🏛️ Republic
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Plato-raphael.jpg" width="150" />
+
 Republic is a batteries-included web framework for **human-led, AI-assisted development**.
 
 It is designed for a world where software is continuously generated, refactored, upgraded, and deployed with the help of AI — but where humans still define intent, behaviour, and architecture.
